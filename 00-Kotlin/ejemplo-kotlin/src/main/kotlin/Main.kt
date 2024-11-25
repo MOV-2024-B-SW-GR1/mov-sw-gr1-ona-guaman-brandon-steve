@@ -16,7 +16,7 @@ fun main() {
     //VAL>VAR
 
     //Duck Typing
-    val ejemploVariable = "Brandon Steve"
+    val ejemploVariable = "Brandon SteveO"
     ejemploVariable.trim()
     val edadEjemplo: Int = 12
     //ejemploVariable= edadEjemplo //Error
