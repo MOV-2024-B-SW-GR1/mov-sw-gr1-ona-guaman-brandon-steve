@@ -21,7 +21,7 @@ fun main() {
     val edadEjemplo: Int = 12
     //ejemploVariable= edadEjemplo //Error
     //Variables primitivas
-    val nombreProfesor: String = "Brandon Steve"
+    val nombreProfesor: String = "BrandonSteve onaguaman"
     val sueldo: Double = 1.2
     val estadoCivil: Char = 'C'
     val mayorEdad: Boolean = true
