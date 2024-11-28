@@ -59,6 +59,23 @@ fun main() {
     //usando el parametro sueldo en 2da posicion
     //usando el parametro tasa en 3era posicion
     //gracias a los parametros nombrados
+
+    //CLASES USO:
+    val SumaA = Suma(1,1)
+    val SumaB = Suma(null,1)
+    val SumaC = Suma(1,null)
+    val SumaD = Suma(null,null)
+
+    SumaA.sumar()
+    SumaB.sumar()
+    SumaC.sumar()
+    SumaD.sumar()
+
+    println(Suma.pi)
+    println(Suma.elevarAlCuadrado(2))
+    println(Suma.historialSumas)
+
+
 }
 
 fun imprimirNombre(nombre:String):Unit{ //Unit es opcional, es similar al void
@@ -132,6 +149,65 @@ class Suma(
     unoParametro,
     dosParametro
 ){
+    public val soyPublicoExplicito: String = "Publicas"
+    val soyPublicoImplicite:String = "Publico Implicito"
+    init { //bloque constructor primario
+        this.numeroUno
+        this.numeroDos
+        numeroUno   // this. OPCIONAL [propiedades, metodos]
+        numeroDos // this. OPCIONAL [propiedades, metodos]
+        this.soyPublicoImplicite
+        soyPublicoExplicito
+    }
+
+    constructor( //Constructor secundario
+        uno:Int?, //Entero nullable
+        dos: Int,
+    ):this(
+        if (uno==null) 0 else uno,dos
+    ){
+        //bloque de codigo del constructor secundario
+    }
+    constructor( //Constructor secundario
+        uno: Int,
+        dos: Int?, //Entero nullable
+    ):this(
+        uno,
+        if (dos==null) 0 else dos
+    ){
+        //bloque de codigo del constructor secundario
+    }
+
+    constructor( //Constructor secundario
+        uno: Int?, //Entero nullable
+        dos: Int?,
+    ):this(
+        if (uno==null) 0 else uno,
+        if (dos==null) 0 else dos,
+    ){
+        //bloque de codigo del constructor secundario
+    }
+
+    fun sumar (): Int {
+        val total = numeroUno + numeroDos
+        agregarHisotorial(total)
+        return total
+    }
+
+    companion object{ //comparte entre todas las instancias, similar al Static
+        //funciones, variables
+        //NombreClase.metodo,NombreClase.funcion =>
+        //Suma.pi
+        val pi = 3.14
+        //Suma.elevarAlCuadrado
+        fun elevarAlCuadrado(num:Int):Int{return num*num}
+        val historialSumas = arrayListOf<Int>()
+
+        fun agregarHisotorial(valorTotalSuma:Int){
+            historialSumas.add(valorTotalSuma)
+        }
+
+    }
 
 }
 
