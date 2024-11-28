@@ -75,6 +75,66 @@ fun main() {
     println(Suma.elevarAlCuadrado(2))
     println(Suma.historialSumas)
 
+    //ARREGLOS
+    //Estarticos
+    val arregloEstatico: Array<Int> = arrayOf<Int>(1,2,3)
+    println(arregloEstatico);
+    //Dinamicos
+    val arregloDinamico: ArrayList<Int> = arrayListOf<Int>(1,2,3,4,5,6,7,8,9,10)
+    println(arregloDinamico)
+    arregloDinamico.add(11)
+    arregloDinamico.add(12)
+    println(arregloDinamico)
+
+    // FOR EACH => Unit
+    // Iterar un arreglo
+    val respuestaForEach: Unit = arregloDinamico
+        .forEach { valorActual: Int -> // -> =>
+            println("Valor actual: ${valorActual}");
+        }
+
+    // "it" (en ingles "eso") significa el elemento iterado
+    arregloDinamico.forEach{ println("Valor Actual (it): ${it}")}
+
+    // MAP→ MUTA (Modifica cambia) el arreglo
+    // 1) Enviamos el nuevo valor de la iteracion
+    // 2) Nos devuelve un NUEVO ARREGLO con valores
+    // de las iteraciones
+    val respuestaMap: List<Double> = arregloDinamico
+        .map { valorActual: Int ->
+            return@map valorActual.toDouble()+ 100.00
+        }
+    println(respuestaMap)
+    val respuestaMapDos=arregloDinamico.map {it + 15 }
+    println(respuestaMapDos)
+
+    //FILTER -> Filtrar el arreglo
+    //1) Devolver una expresion TRUE or FALSE
+    //2) Nuevo arreglo filtrado
+
+    val respuestaFilter:List<Int> = arregloDinamico
+        .filter { valorActual:Int->
+            //Expresion o Cndicion
+            val mayoresACinco: Boolean=valorActual>5
+            return@filter mayoresACinco
+        }
+    val respuestaFilterDos = arregloDinamico.filter(it<6)
+    println(respuestaFilter)
+    println(respuestaFilterDos)
+
+    //OR AND
+    //OR -> ANY (Alguno Cumple?)
+    //AND -> ALL (Todos Cumplen?)
+    val respuestaAny: Boolean = arregloDinamico
+        .any { valorActual: Int->
+            return@any (valorActual>5)
+        }
+    println(respuestaAny) //True
+    val respuestaAll:Boolean = arregloDinamico
+        .all { valorActual:Int ->
+            return@all (valorActual>5)
+        }
+    println(respuestaAll)
 
 }
 
