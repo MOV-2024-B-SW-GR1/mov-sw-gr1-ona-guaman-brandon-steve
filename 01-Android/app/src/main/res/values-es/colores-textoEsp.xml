@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="saludo">HOLA AMIGOS en ESPAÑOL LANDSCAPE</string>
+    <color name="saludo_color">#3BFFD8</color>
+    <color name="fondo_color">#D1870C</color>
+</resources>

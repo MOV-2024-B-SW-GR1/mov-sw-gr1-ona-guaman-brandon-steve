@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="saludo">HOLA AMIGOS en Español Portrait</string>
+    <color name="saludo_color">#3F51B5</color>
+    <color name="fondo_color">#F44336</color>
+</resources>
