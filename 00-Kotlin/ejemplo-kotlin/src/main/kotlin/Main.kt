@@ -118,7 +118,7 @@ fun main() {
             val mayoresACinco: Boolean=valorActual>5
             return@filter mayoresACinco
         }
-    val respuestaFilterDos = arregloDinamico.filter(it<6)
+    val respuestaFilterDos = arregloDinamico.filter{it <6}
     println(respuestaFilter)
     println(respuestaFilterDos)
 
