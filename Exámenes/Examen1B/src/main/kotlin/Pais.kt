@@ -8,7 +8,7 @@ data class Pais (
     var codigo: String,
     var fechaFundacion: Date,
     var areaTotal: Double,
-    var idomaOficial: String,
+    var idiomaOficial: String,
     var ciudades : MutableList<Ciudad> = mutableListOf()
 ) {
     override fun toString(): String {
@@ -17,7 +17,7 @@ data class Pais (
                 "Código " + codigo + "\n" +
                 "Fecha de Fundación: " + Fecha.formatoFecha(fechaFundacion)  + "\n" +
                 "Area Total " + areaTotal + "\n" +
-                "Idioma oficial " + idomaOficial + "\n" +
+                "Idioma oficial " + idiomaOficial + "\n" +
                 "Ciudades:\n" + "{" + ciudades.joinToString() { it.toString() + "\n}" } + "\n"
     }
 
