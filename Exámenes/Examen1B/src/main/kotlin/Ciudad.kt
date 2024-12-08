@@ -23,8 +23,9 @@ data class Ciudad(
             |País: $paisNombre
         """.trimMargin()+"\n"
     }
+    //Funcion para obtener el nombre del pais mediante la intancia de PaisMetodos
     private fun obtenerNombrePais(PaisId:Int): String{
-        val paisCrud =PaisCrud("pais.csv", CiudadCrud("ciudad.csv"))
+        val paisCrud =PaisMetodos("pais.csv", CiudadMetodos("ciudad.csv"))
         val pais = paisCrud.readPais().find {it.id.toInt()==PaisId}
         return pais?.nombre?: "Desconocido"
     }

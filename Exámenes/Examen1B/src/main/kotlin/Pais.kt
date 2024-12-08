@@ -16,7 +16,7 @@ data class Pais (
                 "\t" + nombre.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } + "\n" +
                 "Código: " + codigo + "\n" +
                 "Fecha de Fundación: " + Fecha.formatoFecha(fechaFundacion)  + "\n" +
-                "Area Total: " + areaTotal + "\n" +
+                "Area Total (Millones de Km^2): " + areaTotal + "\n" +
                 "Idioma oficial: " + idiomaOficial + "\n" +
                 "Ciudades:\n" + "{" + ciudades.joinToString() { it.toString() + "\n}" } + "\n"
     }

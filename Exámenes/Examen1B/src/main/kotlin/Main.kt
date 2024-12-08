@@ -4,35 +4,35 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun main() {
-    //println("Hello World!asdfffasd")
-    val ciudadCrud = CiudadCrud("ciudad.csv")
-    val paisCrud = PaisCrud("pais.csv", ciudadCrud)
+
+    val ciudadCrud = CiudadMetodos("ciudad.csv")
+    val paisCrud = PaisMetodos("pais.csv", ciudadCrud)
     val scanner = Scanner(System.`in`)
 
     //    MENU
     var opcion: Int = 0;
     while(opcion != 9){
         mostrarMenu();
-//        Leer opcion
+        //Se lee una opcion
         opcion = readLine()!!.toInt();
         when(opcion){
             1 -> {
-//                Mostrar ciudades
+                //Mostrar la lista de ciudades
                 println(ciudadCrud.readCiudades())
 
             }
             2 -> {
-//                Mostrar paises con ciudades
+                //Mostrar paises con ciudades
                 println(paisCrud.readPais())
             }
             3 -> {
-//                Mostrar lista de Paises
+                //Mostrar lista de Paises ingresados
                 val listaPaises = paisCrud.readPais()
                 println("Paises Disponibles:")
                 listaPaises.forEach { println("${ it.id }:${it.nombre}") }
             }
             4 -> {
-//                Ingresar nueva ciudad
+                //Ingresar nueva ciudad
                 println("Ingrese la nombre de la ciudad:")
                 val nombre = scanner.nextLine()
                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
@@ -49,8 +49,6 @@ fun main() {
                 println("La ciudad es la capital? (si-no)")
                 val esCapitalStr = scanner.nextLine()
                 val esCapital = if (esCapitalStr == "si") true else false
-
-
 
                 val listaPais = paisCrud.readPais()
                 println("Paises:")
@@ -78,9 +76,9 @@ fun main() {
                 }
             }
             5 -> {
-//                Modificar ciudad
+                //Modificar o Actulizar ciudad
                 println(ciudadCrud.readCiudades())
-                println("Ingrese el N. de la cuidad para actualizarla:")
+                println("Ingrese el N. de la ciudad para actualizarla:")
                 val ciudadId = scanner.nextInt()
                 scanner.nextLine() // Consumir la nueva línea
 
@@ -112,7 +110,7 @@ fun main() {
 
             }
             6 -> {
-//                Eliminar ciudad
+                //Eliminar ciudad
                 println(ciudadCrud.readCiudades())
                 println("Ingrese el N. de la ciudad que desea eliminar:")
                 val usuarioId = scanner.nextInt()
@@ -120,7 +118,7 @@ fun main() {
                 println("!!Ciudad eliminada correctamente!!")
             }
             7 -> {
-//                Ingresar nuevo Pais
+                //Ingresar nuevo Pais
                 println("Ingrese el nombre del Pais:")
                 val nombre = scanner.nextLine().replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
                 println("Ingrese el código del Pais:")
@@ -146,7 +144,7 @@ fun main() {
                 println("Pais creado correctamente!")
             }
             8 -> {
-//                Eliminar Pais
+                //Eliminar Pais
                 println(paisCrud.readPais())
                 println("Ingrese el N. del Pais  que desea eliminar:")
                 val paisId = scanner.nextInt()
@@ -154,7 +152,7 @@ fun main() {
                 println("Pais eliminado correctamente")
             }
             9 -> {
-//                Salir
+                //Salir
                 println("Gracias por su participación")
                 break;
             }
@@ -166,14 +164,14 @@ fun main() {
 
 fun mostrarMenu(){
     println("\n\t"+ "******* Paises y Ciudades *******\n" +
-            "1. Mostrar ciudades\n"+
-            "2. Mostrar paises y ciudades\n"+
+            "1. Mostrar lista de ciudades\n"+
+            "2. Mostrar paises y ciudades repectivas\n"+
             "3. Mostrar Lista de los paises\n"+
             "4. Ingresar nueva ciudad\n"+
-            "5. Modificar ciudad\n"+
+            "5. Actualizar ciudad\n"+
             "6. Eliminar ciudad\n"+
             "7. Ingresar nuevo pais\n"+
             "8. Eliminar pais\n"+
             "9. Salir\n"+
-            "Ingresa tu opcion: ")
+            "Ingresa una opcion: ")
 }

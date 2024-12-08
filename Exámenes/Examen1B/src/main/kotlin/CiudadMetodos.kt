@@ -3,11 +3,11 @@ package org.example
 import java.io.File
 import java.text.SimpleDateFormat
 
-class CiudadCrud (
+class CiudadMetodos (
     val csvFile : String
 ) {
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-
+    //Funcion Crear Ciudad
     fun createC(ciudad:Ciudad){
         val file = File(csvFile)
         if (!file.exists()) {
@@ -17,6 +17,7 @@ class CiudadCrud (
         val newLine ="${newId},${ciudad.nombre},${ciudad.poblacion},${ciudad.tieneAeropuerto},${dateFormat.format(ciudad.fechaFundacionC)},${ciudad.esCapital},${ciudad.idPais}\n"
         file.appendText(newLine)
     }
+    //Funcion leer Ciudad
     fun readCiudades(): List<Ciudad>{
         val file = File(csvFile)
         if(!file.exists()){
@@ -41,6 +42,7 @@ class CiudadCrud (
         }
         return ciudadesLeidas
     }
+    //Funcion Actualizar Ciudad
     fun updateCiudad(ciudad: Ciudad){
         val ciudades = readCiudades().toMutableList()
         val index = ciudades.indexOfFirst { it.id == ciudad.id }
@@ -49,10 +51,12 @@ class CiudadCrud (
             saveAllCiudad(ciudades)
         }
     }
+    //Funcion Eliminar Ciudad
     fun deleteCiudad(id: Int){
         val ciudades =readCiudades().filter { it.id != id }
         saveAllCiudad(ciudades)
     }
+    //Funcion para guardar las cuidades registradas por el Usuario
     private fun saveAllCiudad(ciudades: List<Ciudad>){
         val file = File(csvFile)
         file.writeText(ciudades.joinToString("\n"){ciudad ->
@@ -60,6 +64,7 @@ class CiudadCrud (
                     "${ciudad.esCapital},${ciudad.idPais}"
         }+"\n")
     }
+    //Funcion para generar ID a la cuidad automaticamente
     private fun generateNewId():Int{
         val ciudades = readCiudades()
         return if (ciudades.isEmpty()){
