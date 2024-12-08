@@ -14,10 +14,10 @@ data class Pais (
     override fun toString(): String {
         return "\n" +
                 "\t" + nombre.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } + "\n" +
-                "Código " + codigo + "\n" +
+                "Código: " + codigo + "\n" +
                 "Fecha de Fundación: " + Fecha.formatoFecha(fechaFundacion)  + "\n" +
-                "Area Total " + areaTotal + "\n" +
-                "Idioma oficial " + idiomaOficial + "\n" +
+                "Area Total: " + areaTotal + "\n" +
+                "Idioma oficial: " + idiomaOficial + "\n" +
                 "Ciudades:\n" + "{" + ciudades.joinToString() { it.toString() + "\n}" } + "\n"
     }
 

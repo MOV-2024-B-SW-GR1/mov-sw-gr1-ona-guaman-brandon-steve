@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun main() {
-    println("Hello World!asdfffasd")
+    //println("Hello World!asdfffasd")
     val ciudadCrud = CiudadCrud("ciudad.csv")
     val paisCrud = PaisCrud("pais.csv", ciudadCrud)
     val scanner = Scanner(System.`in`)
@@ -19,6 +19,7 @@ fun main() {
             1 -> {
 //                Mostrar ciudades
                 println(ciudadCrud.readCiudades())
+
             }
             2 -> {
 //                Mostrar paises con ciudades
@@ -35,14 +36,14 @@ fun main() {
                 println("Ingrese la nombre de la ciudad:")
                 val nombre = scanner.nextLine()
                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-                println("Ingrese la poblacion de la ciudad (Millones):")
+                println("Ingrese la poblacion (Millones de personas):")
                 val poblacion = scanner.nextDouble()
                 scanner.nextLine() // Consumir el salto de línea residual después de leer el double
 
                 println("La ciudad tiene Aeropuerto? (si-no)")
                 val tieneAeropuertoStr = scanner.nextLine()
                 val tieneAeropuerto = if (tieneAeropuertoStr == "si") true else false
-                println("Ingrese la fecha de fundación:")
+                println("Ingrese la fecha de fundación (yyyy-MM-dd):")
                 val fechaFundacionCStr = scanner.nextLine()
                 val fechaFundacionC = SimpleDateFormat("yyyy-MM-dd").parse(fechaFundacionCStr)
                 println("La ciudad es la capital? (si-no)")
@@ -68,7 +69,7 @@ fun main() {
                     idPais = pais
                 )
                 ciudadCrud.createC(nuevaCiudad)
-                println("!!Ciudad Creada!!")
+                println("!!Ciudad Ingresada correctamente!!")
 
                 val paises = listaPais.find { it.id == pais }
                 if (paises != null) {
@@ -79,21 +80,21 @@ fun main() {
             5 -> {
 //                Modificar ciudad
                 println(ciudadCrud.readCiudades())
-                println("Ingrese el N. del auto para actualizarlo:")
+                println("Ingrese el N. de la cuidad para actualizarla:")
                 val ciudadId = scanner.nextInt()
                 scanner.nextLine() // Consumir la nueva línea
 
                 val ciudad = ciudadCrud.readCiudades().find { it.id == ciudadId }
                 if (ciudad != null) {
-                    println("Ingrese la nueva poblacion de la ciudad (Presione Enter para mantener el actual):")
+                    println("Ingrese la nueva poblacion de la ciudad (Presione Enter para no realizar cambios):")
                     val poblacionStr = scanner.nextLine()
                     val nuevaPoblacion = if (poblacionStr.isNotBlank()) poblacionStr.toDouble() else ciudad.poblacion
 
-                    println("¿La ciudad tiene Aeropuerto? (si/no, o presione Enter para mantener el actual):")
+                    println("¿La ciudad tiene Aeropuerto? (si/no, o presione Enter para no realizar cambios):")
                     val tieneAeropuertoStr = scanner.nextLine()
                     val nuevoTieneAeropuerto = if (tieneAeropuertoStr.isNotBlank()) tieneAeropuertoStr.equals("si", ignoreCase = true) else ciudad.tieneAeropuerto
 
-                    println("¿La ciudad es capital? (si/no, o presione Enter para mantener el actual):")
+                    println("¿La ciudad es capital? (si/no, o presione Enter para no realizar cambios):")
                     val esCapitalStr = scanner.nextLine()
                     val nuevoEsCapital = if (esCapitalStr.isNotBlank()) esCapitalStr.equals("si", ignoreCase = true) else ciudad.esCapital
 
@@ -124,10 +125,10 @@ fun main() {
                 val nombre = scanner.nextLine().replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
                 println("Ingrese el código del Pais:")
                 val codigo = scanner.nextLine().replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-                println("Ingrese la fecha de fundación del país:")
+                println("Ingrese la fecha de fundación del país (yyyy-MM-dd):")
                 val fechaFundacionStr = scanner.nextLine()
                 val fechaFundacion = SimpleDateFormat("yyyy-MM-dd").parse(fechaFundacionStr)
-                println("Ingrese el área total (m^2):")
+                println("Ingrese el área total (millones de km^2):")
                 val areaTotal = scanner.nextDouble()
                 scanner.nextLine() // Consumir el salto de línea residual
                 println("Ingrese el idioma oficial del Pais:")

@@ -16,7 +16,7 @@ class PaisCrud (
             file.createNewFile()
         }
         val newId=generateNewId()
-        val newLine ="${newId},${pais.nombre},${pais.codigo},${dateFormatInput.format(pais.fechaFundacion)},${pais.areaTotal},${pais.idiomaOficial}\n"
+        val newLine ="${newId},${pais.nombre},${pais.codigo},${dateFormatInput.format(pais.fechaFundacion)},${pais.areaTotal},${pais.idiomaOficial} \n"
         file.appendText(newLine)
     }
     fun readPais(): List<Pais>{
@@ -64,7 +64,7 @@ class PaisCrud (
     private fun saveAllPaises(paises: List<Pais>){
         val file = File(paisCsvFile)
         file.writeText(paises.joinToString("\n") { pais ->
-            "${pais.id},${pais.codigo},${dateFormatInput.format(pais.fechaFundacion)},${pais.areaTotal}, ${pais.idiomaOficial}"
+            "${pais.id},${pais.nombre},${pais.codigo},${dateFormatInput.format(pais.fechaFundacion)},${pais.areaTotal}, ${pais.idiomaOficial}\n"
         })
     }
     private fun generateNewId():Int{

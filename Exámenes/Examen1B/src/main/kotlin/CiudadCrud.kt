@@ -14,7 +14,7 @@ class CiudadCrud (
             file.createNewFile()
         }
         val newId = generateNewId()
-        val newLine ="${newId},${ciudad.nombre},${ciudad.poblacion},${ciudad.tieneAeropuerto},${dateFormat.format(ciudad.fechaFundacionC)},${ciudad.tieneAeropuerto}\n"
+        val newLine ="${newId},${ciudad.nombre},${ciudad.poblacion},${ciudad.tieneAeropuerto},${dateFormat.format(ciudad.fechaFundacionC)},${ciudad.esCapital},${ciudad.idPais}\n"
         file.appendText(newLine)
     }
     fun readCiudades(): List<Ciudad>{

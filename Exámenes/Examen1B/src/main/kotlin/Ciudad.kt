@@ -16,7 +16,7 @@ data class Ciudad(
         return "\n"+"""
             |Ciudad Número: $id
             |Nombre Cuidad: $nombre
-            |Poblacion (m^2): $poblacion
+            |Poblacion (millones de personas): $poblacion
             |Aeropuerto: $tieneAeropuerto
             |Fecha de Fundación: $fechaFundacionC
             |Es Capital: $esCapital
