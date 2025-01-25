@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadPais(): MutableList<String> {
-        return gestorSQL.getPais().map { it.nombrePais + " " + it.codigo }.toMutableList()
+        return gestorSQL.getPais().map { it.nombrePais + "- Codigo: " + it.codigo + "- Fundación: " + it.fechaFundacion }.toMutableList()
     }
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {

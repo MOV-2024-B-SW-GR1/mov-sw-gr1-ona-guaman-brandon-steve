@@ -23,7 +23,7 @@ class CrearCiudadActivity : AppCompatActivity() {
         val esCapitaEditText = findViewById<EditText>(R.id.esCapital)
         val tieneAereopuertoEditText = findViewById<EditText>(R.id.tieneAereoPuerto)
         val guardarFacturaButton = findViewById<Button>(R.id.GuardarFacturaBt)
-        val paisId = intent.getIntExtra("paisId", 0)  // Asumiendo que el clienteId es pasado a esta actividad
+        val paisId = intent.getIntExtra("paisId", 0)  // Asumiendo que el paisId es pasado a esta actividad
 
         guardarFacturaButton.setOnClickListener {
             val nombreCiudad = nombreCiudadEditText.text.toString().trim()
@@ -46,7 +46,7 @@ class CrearCiudadActivity : AppCompatActivity() {
             val id = gestorSQL.addCiudad(nombreCiudad, poblacion, esCapital, tieneAeropuerto, paisId)
             if (id > 0) {
                 Log.d("CrearCiudadActivity", "Ciudad creada con ID: $id")
-                setResult(RESULT_OK)  // Indica que la factura fue creada con éxito
+                setResult(RESULT_OK)  // Indica que la ciudad fue creada con éxito
             } else {
                 Log.e("CrearCiudadActivity", "Error al guardar la ciudad")
                 setResult(RESULT_CANCELED)  // Indica que hubo un error

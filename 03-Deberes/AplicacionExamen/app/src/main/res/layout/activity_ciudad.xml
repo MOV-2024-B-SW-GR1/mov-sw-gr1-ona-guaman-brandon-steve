@@ -9,22 +9,23 @@
 
     <TextView
         android:id="@+id/AutosV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_width="423dp"
+        android:layout_height="53dp"
+        android:background="#673AB7"
         android:text="Lista de Ciudades"
-        android:textColor="#03A9F4"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/CrearAutosBt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
+        android:layout_width="128dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="116dp"
         android:text="Crear"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,11 +46,11 @@
         android:id="@+id/RegresarBt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="116dp"
         android:text="Regresar"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintHorizontal_bias="0.195"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

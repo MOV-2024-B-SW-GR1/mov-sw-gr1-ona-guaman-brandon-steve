@@ -52,7 +52,8 @@ class CiudadActivity : AppCompatActivity() {
     }
 
     private fun loadCiudades(): List<String> {
-        return gestorSQL.getCiudad().map { it.nombreCiudad + " - " + it.poblacion }
+        return gestorSQL.getCiudad().map { it.nombreCiudad + " - Población: " + it.poblacion +
+                "M - Capital?: " + it.esCapital + " - Aereopuerto: "+it.tieneAereopuerto }
     }
 
     private fun updateListView() {
@@ -76,7 +77,7 @@ class CiudadActivity : AppCompatActivity() {
                 gestorSQL.deleteCiudad(gestorSQL.getCiudad()[info.position].id)
                 updateListView()
             }
-            R.id.map -> showMap(gestorSQL.getCiudad()[info.position].nombreCiudad)
+            //R.id.map -> showMap(gestorSQL.getCiudad()[info.position].nombreCiudad)
             else -> return super.onContextItemSelected(item)
         }
         return true
