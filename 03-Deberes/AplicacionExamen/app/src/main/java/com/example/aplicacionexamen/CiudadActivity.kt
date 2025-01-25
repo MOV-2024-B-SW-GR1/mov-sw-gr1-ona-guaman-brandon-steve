@@ -109,15 +109,6 @@ class CiudadActivity : AppCompatActivity() {
 
         builder.show()
     }
-
-    private fun showMap(ubicacion: String) {
-        val gmmIntentUri = Uri.parse("geo:0,0?q=${Uri.encode(ubicacion)}")
-        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-        mapIntent.setPackage("com.google.android.apps.maps")
-        if (mapIntent.resolveActivity(packageManager) != null) {
-            startActivity(mapIntent)
-        } else {
-            Toast.makeText(this, "Google Maps no está instalado.", Toast.LENGTH_SHORT).show()
-        }
-    }
+    // ----------------------------------------------------====================
+    
 }
