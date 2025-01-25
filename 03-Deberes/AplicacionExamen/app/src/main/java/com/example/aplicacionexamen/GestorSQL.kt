@@ -143,54 +143,7 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         }
         return id
     }
-    //Se agrego el parametro paisID: Int
-    /*fun getCiudad(paisId: Int): MutableList<Ciudad> {
-        val db = this.readableDatabase
-        val projection = arrayOf("id", "nombreCiudad", "poblacion", "esCapital", "tieneAereopuerto", "paisId")
-        //val cursor = db.query("Ciudad", projection, null, null, null, null, null)
-        val cursor = db.query("Ciudad", projection, "paisId = ?", arrayOf(paisId.toString()), null, null, null, null)
-        val ciudads = mutableListOf<Ciudad>()
-        with(cursor) {
-            while (moveToNext()) {
-                val id = getInt(getColumnIndexOrThrow("id"))
-                val nombreCiudad = getString(getColumnIndexOrThrow("nombreCiudad"))
-                val poblacion = getDouble(getColumnIndexOrThrow("poblacion"))
-                //val esCapital = getInt(getColumnIndexOrThrow("esCapital")) == 1
-                //val tieneAereopuerto = getInt(getColumnIndexOrThrow("tieneAereopuerto")) == 1
-                val esCapital = getString(getColumnIndexOrThrow("esCapital"))
-                val tieneAereopuerto = getString(getColumnIndexOrThrow("tieneAereopuerto"))
-                val paisId = getInt(getColumnIndexOrThrow("paisId"))
-                ciudads.add(Ciudad(id, nombreCiudad, poblacion, esCapital, tieneAereopuerto, paisId))
-            }
-        }
-        cursor.close()
-        return ciudads
-    }*/
 
-    /*fun getCiudad(paisId: Int): MutableList<Ciudad> {
-        val db = this.readableDatabase
-        val projection = arrayOf("id", "nombreCiudad", "poblacion", "esCapital", "tieneAereopuerto", "paisId")
-        val cursor = db.query(
-            "Ciudad", projection,
-            "paisId = ?", arrayOf(paisId.toString()), // Filtra por paisId
-            null, null, null
-        )
-
-        val ciudades = mutableListOf<Ciudad>()
-        with(cursor) {
-            while (moveToNext()) {
-                val id = getInt(getColumnIndexOrThrow("id"))
-                val nombreCiudad = getString(getColumnIndexOrThrow("nombreCiudad"))
-                val poblacion = getDouble(getColumnIndexOrThrow("poblacion"))
-                val esCapital = getString(getColumnIndexOrThrow("esCapital"))
-                val tieneAereopuerto = getString(getColumnIndexOrThrow("tieneAereopuerto"))
-                val paisId = getInt(getColumnIndexOrThrow("paisId"))
-                ciudades.add(Ciudad(id, nombreCiudad, poblacion, esCapital, tieneAereopuerto, paisId))
-            }
-        }
-        cursor.close()
-        return ciudades
-    }*/
     fun getCiudad(paisId: Int): MutableList<Ciudad> {
         Log.d("GestorSQL", "Obteniendo ciudades para paisId: $paisId")  // 🟢 Log de depuración
 
@@ -220,8 +173,6 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         cursor.close()
         return ciudades
     }
-
-
 
     fun updateCiudad(id: Int, nombreCiudad: String, poblacion: Double, esCapital: String, tieneAereopuerto: String): Int {
         val db = this.writableDatabase
