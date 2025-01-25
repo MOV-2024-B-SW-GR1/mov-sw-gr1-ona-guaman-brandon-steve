@@ -1,12 +1,20 @@
 package com.example.sw2024bgr1_bson
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.provider.ContactsContract.Contacts
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,5 +44,72 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this,clase))
     }
 //comentario
+    fun mostrarSnackbar(texto:String){
+        val snack = Snackbar.make(
+            findViewById(R.id.main_ciclo_vida),
+            texto,
+            Snackbar.LENGTH_INDEFINITE
+        )
+        snack.show()
+    }
+    val callbackContenidoIntentExplicito = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){
+        result->
+        if(result.resultCode== Activity.RESULT_OK){
+            if(result.data != null){
+                val data = result.data?.getStringExtra("NombreModificado")
+                mostrarSnackbar("$data")
+            }
+        }
+    }
+
+    val callbackContenidoImplicito=
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){
+            result ->
+            if(result.resultCode == Activity.RESULT_OK){
+                if(result.data != null){
+                    //validacion de contacto
+                    if(result.data!!.data !=null){
+                        val uri: Uri = result.data!!.data!!
+                        val cursor = contentResolver.query(
+                            uri, null, null, null, null, null
+                        )
+                        cursor?.moveToFirst()
+                        val indiceTelefono = cursor?.getColumnIndex(
+                            ContactsContract.CommonDataKinds.Phone.NUMBER
+                        )
+                        val telefono = cursor?.getString(indiceTelefono!!)
+                        cursor?.close()
+                        mostrarSnackbar("Telefono $telefono")
+                    }
+                }
+            }
+        }
+
+    val botonImplicito = findViewById<Button>(R.id.btn_ir_intent_implicito)
+    botonImplicito
+        .setOnClickListener{
+            val intentConRespuesta = Intent(
+                Intent.ACTION_PICK,
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+            )
+            callbackContenidoIntentExplicito.launch(intentConRespuesta)
+        }
+
+    val botonExplicito = findViewById<Button>(R.id.btn_ir_intent_explicito)
+    botonExplicito
+        .setOnClickListener{
+            val intentExplixito = Intent(
+                this, CIntentExplicitoParametros::class.java
+            )
+            intentExplixito.putExtra("Nombre", "Brandon")
+            intentExplixito.putExtra("Apellido", "Oña")
+            intentExplixito.putExtra("Edad", "34")
+            callbackContenidoIntentExplicito.launch(intentExplixito)
+        }
+
 
 }

@@ -42,4 +42,23 @@
         app:layout_constraintStart_toStartOf="@+id/cl_ciclo_vida"
         tools:layout_editor_absoluteY="429dp" />
 
+    <Button
+        android:id="@+id/btn_ir_intent_explicito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Explicito"
+        app:layout_constraintBottom_toTopOf="@+id/cl_ciclo_vida"
+        app:layout_constraintEnd_toEndOf="@+id/cl_ciclo_vida"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="@+id/cl_ciclo_vida" />
+
+    <Button
+        android:id="@+id/btn_ir_intent_implicito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Implicito"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="207dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
