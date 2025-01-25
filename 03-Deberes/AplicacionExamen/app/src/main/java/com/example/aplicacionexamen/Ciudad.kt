@@ -7,6 +7,4 @@ data class Ciudad(
     val esCapital: String,
     val tieneAereopuerto: String,
     val paisId: Int
-    //val esCapital: Boolean,
-    //val tieneAereopuerto: Boolean,
 )

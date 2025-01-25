@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/poblacionCiudad"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.681" />
+        app:layout_constraintVertical_bias="0.658" />
 
     <Button
         android:id="@+id/GuardarCiudadBt"
@@ -63,7 +63,7 @@
         android:id="@+id/tieneAereoPuerto"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="56dp"
         android:ems="10"
         android:hint="Nombre Aereopuerto"
         android:inputType="text"

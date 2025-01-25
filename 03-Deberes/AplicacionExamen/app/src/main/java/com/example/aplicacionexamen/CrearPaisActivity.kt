@@ -23,7 +23,8 @@ class CrearPaisActivity : AppCompatActivity() {
         val fechaFEditText = findViewById<EditText>(R.id.fechaFundacion)
         val guardarButton = findViewById<Button>(R.id.guardarPais)
 
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        //val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
         guardarButton.setOnClickListener {
             val nombreP = nombrePaisEditText.text.toString().trim()
@@ -45,33 +46,5 @@ class CrearPaisActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error: Fecha inválida, usa formato yyyy-MM-dd", Toast.LENGTH_SHORT).show()
             }
         }
-
-
-        /*guardarButton.setOnClickListener {
-            val nombreP = nombrePaisEditText.text.toString().trim()
-            val codigo = codigoEditText.text.toString().trim()
-            val fechaFun = fechaFEditText.text.toString().trim()
-
-            // Guardar directamente en la base de datos
-            /*val id = gestorSQL.addPais(nombreP, codigo, fechaFun)
-            if (id > 0) {
-                setResult(RESULT_OK)  // Indica que el cliente fue creado con éxito
-            } else {
-                setResult(RESULT_CANCELED)  // Indica que hubo un error
-            }
-            finish()*/
-            try {
-                dateFormat.parse(fechaFun) // Intenta analizar la fecha
-                val id = gestorSQL.addPais(nombreP, codigo, fechaFun)
-                if (id > 0) {
-                    setResult(RESULT_OK)
-                } else {
-                    setResult(RESULT_CANCELED)
-                }
-                finish()
-            } catch (e: Exception) {
-                Toast.makeText(this, "Error: Fecha inválida, usa formato yyyy-MM-dd", Toast.LENGTH_SHORT).show()
-            }
-        }*/
     }
 }

@@ -56,7 +56,7 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         val db = this.writableDatabase
         val formattedDate = try {
             val parsedDate = dateFormat.parse(fechaFun)
-            dateFormat.format(parsedDate ?: Date())/////OOOOOOOOJOOOOOOOOO
+            dateFormat.format(parsedDate ?: Date())
         } catch (e: Exception) {
             dateFormat.format(Date()) // Usa la fecha actual si hay error
         }
@@ -77,7 +77,8 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         return id
     }
 
-    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    //private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
     fun getPais(): MutableList<Pais> {
         val db = this.readableDatabase
         val projection = arrayOf("id", "nombrePais", "codigoPais", "fechaFundacion")
@@ -92,7 +93,7 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
                 // Parsear la fecha desde el formato almacenado
                 val fechaFundacion = dateFormat.parse(fechaFundacionString) ?: Date()
 
-                pais.add(Pais(id, nombrePais, codigoPais, fechaFundacion))   //Posible error
+                pais.add(Pais(id, nombrePais, codigoPais, fechaFundacion))
             }
         }
         cursor.close()

@@ -39,21 +39,11 @@ class MainActivity : AppCompatActivity() {
         registerForContextMenu(listView)
     }
 
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            adapter.clear()
-            adapter.addAll(loadPais())
-            adapter.notifyDataSetChanged()
-        }
-    }*/
     override fun onResume() {
         super.onResume()
         Log.d("MainActivity", "Actualizando lista de países en onResume()") // Verifica si entra aquí
         updateListView()
     }
-
-
 
     private fun loadPais(): MutableList<String> {
         return gestorSQL.getPais().map { it.nombrePais + "- Codigo: " + it.codigo + "- Fundación: " + it.fechaFundacion }.toMutableList()
@@ -104,11 +94,6 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
-    /*private fun updateListView() {
-        adapter.clear()
-        adapter.addAll(loadPais())
-        adapter.notifyDataSetChanged()
-    }*/
     private fun updateListView() {
         val paises = gestorSQL.getPais()
         if (paises.isEmpty()) {
@@ -122,16 +107,9 @@ class MainActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
 
-
-
-    /*private fun viewCiudades(position: Int) {
-        val intent = Intent(this, CiudadActivity::class.java)
-        intent.putExtra("paisId", gestorSQL.getPais()[position].id)
-        startActivity(intent)
-    }*/
     private fun viewCiudades(position: Int) {
         val pais = gestorSQL.getPais()[position]
-        Log.d("MainActivity", "Abriendo CiudadActivity con paisId: ${pais.id}")  // 🟢 Log de verificación
+        Log.d("MainActivity", "Abriendo CiudadActivity con paisId: ${pais.id}")  //Log de verificación
 
         val intent = Intent(this, CiudadActivity::class.java)
         intent.putExtra("paisId", pais.id)

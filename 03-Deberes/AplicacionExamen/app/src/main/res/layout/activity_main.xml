@@ -9,17 +9,17 @@
 
     <TextView
         android:id="@+id/Concesionario"
-        android:layout_width="420dp"
+        android:layout_width="416dp"
         android:layout_height="49dp"
-        android:layout_marginTop="4dp"
         android:background="#673AB7"
         android:text="Paises"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="-1dp" />
 
     <Button
         android:id="@+id/crearPais"
