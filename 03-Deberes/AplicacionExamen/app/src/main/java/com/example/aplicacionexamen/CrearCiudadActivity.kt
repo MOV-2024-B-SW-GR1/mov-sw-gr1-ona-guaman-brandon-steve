@@ -22,8 +22,13 @@ class CrearCiudadActivity : AppCompatActivity() {
         val poblacionEditText = findViewById<EditText>(R.id.poblacionCiudad)
         val esCapitaEditText = findViewById<EditText>(R.id.esCapital)
         val tieneAereopuertoEditText = findViewById<EditText>(R.id.tieneAereoPuerto)
-        val guardarFacturaButton = findViewById<Button>(R.id.GuardarFacturaBt)
-        val paisId = intent.getIntExtra("paisId", 0)  // Asumiendo que el paisId es pasado a esta actividad
+        val guardarFacturaButton = findViewById<Button>(R.id.GuardarCiudadBt)
+        //val paisId = intent.getIntExtra("paisId", 0)  // Asumiendo que el paisId es pasado a esta actividad
+        val paisId = intent.getIntExtra("paisId", -1)
+        if (paisId == -1) {
+            Toast.makeText(this, "Error: No se recibió el ID del país", Toast.LENGTH_SHORT).show()
+            //return@setOnClickListener
+        }
 
         guardarFacturaButton.setOnClickListener {
             val nombreCiudad = nombreCiudadEditText.text.toString().trim()

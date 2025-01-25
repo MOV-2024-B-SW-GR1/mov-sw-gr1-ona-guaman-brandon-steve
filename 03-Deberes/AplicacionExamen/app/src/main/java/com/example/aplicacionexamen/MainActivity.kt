@@ -4,6 +4,7 @@ package com.example.aplicacionexamen
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
@@ -15,7 +16,6 @@ import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
-import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private lateinit var listView: ListView
@@ -26,11 +26,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        listView = findViewById(R.id.listViewConcesionario)
+        listView = findViewById(R.id.listViewPaises)
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, loadPais())
         listView.adapter = adapter
 
-        val crearConcesionarioButton = findViewById<Button>(R.id.crearConcesionario)
+        val crearConcesionarioButton = findViewById<Button>(R.id.crearPais)
         crearConcesionarioButton.setOnClickListener {
             val intent = Intent(this, CrearPaisActivity::class.java)
             startActivityForResult(intent, 1)  // Use request code to identify the result
@@ -39,14 +39,21 @@ class MainActivity : AppCompatActivity() {
         registerForContextMenu(listView)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == RESULT_OK) {
             adapter.clear()
             adapter.addAll(loadPais())
             adapter.notifyDataSetChanged()
         }
+    }*/
+    override fun onResume() {
+        super.onResume()
+        Log.d("MainActivity", "Actualizando lista de países en onResume()") // Verifica si entra aquí
+        updateListView()
     }
+
+
 
     private fun loadPais(): MutableList<String> {
         return gestorSQL.getPais().map { it.nombrePais + "- Codigo: " + it.codigo + "- Fundación: " + it.fechaFundacion }.toMutableList()
@@ -65,13 +72,14 @@ class MainActivity : AppCompatActivity() {
                 gestorSQL.deletePais(gestorSQL.getPais()[info.position].id)
                 updateListView()
             }
-            R.id.view_paises -> viewCiudades(info.position)
+            R.id.view_ciudades -> viewCiudades(info.position)
             else -> return super.onContextItemSelected(item)
         }
         return true
     }
 
-    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    //private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
     private fun editPais(position: Int) {
         val client = gestorSQL.getPais()[position]
@@ -96,15 +104,38 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
-    private fun updateListView() {
+    /*private fun updateListView() {
         adapter.clear()
         adapter.addAll(loadPais())
         adapter.notifyDataSetChanged()
+    }*/
+    private fun updateListView() {
+        val paises = gestorSQL.getPais()
+        if (paises.isEmpty()) {
+            Log.e("MainActivity", "No se encontraron países en la base de datos")
+        } else {
+            Log.d("MainActivity", "Se encontraron ${paises.size} países en la base de datos")
+        }
+
+        adapter.clear()
+        adapter.addAll(paises.map { it.nombrePais + " - Código: " + it.codigo + " - Fundación: " + it.fechaFundacion })
+        adapter.notifyDataSetChanged()
     }
 
-    private fun viewCiudades(position: Int) {
+
+
+    /*private fun viewCiudades(position: Int) {
         val intent = Intent(this, CiudadActivity::class.java)
         intent.putExtra("paisId", gestorSQL.getPais()[position].id)
         startActivity(intent)
+    }*/
+    private fun viewCiudades(position: Int) {
+        val pais = gestorSQL.getPais()[position]
+        Log.d("MainActivity", "Abriendo CiudadActivity con paisId: ${pais.id}")  // 🟢 Log de verificación
+
+        val intent = Intent(this, CiudadActivity::class.java)
+        intent.putExtra("paisId", pais.id)
+        startActivity(intent)
     }
+
 }

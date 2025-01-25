@@ -7,7 +7,7 @@
         android:id="@+id/delete"
         android:title="Eliminar" />
     <item
-        android:id="@+id/view_paises"
-        android:title="Ver Paises" />
+        android:id="@+id/view_ciudades"
+        android:title="Ver Ciudades" />
 
 </menu>

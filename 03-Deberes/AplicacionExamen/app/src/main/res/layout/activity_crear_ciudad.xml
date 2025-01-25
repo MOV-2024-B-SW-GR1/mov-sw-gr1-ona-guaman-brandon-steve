@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.681" />
 
     <Button
-        android:id="@+id/GuardarFacturaBt"
+        android:id="@+id/GuardarCiudadBt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="164dp"
@@ -67,10 +67,10 @@
         android:ems="10"
         android:hint="Nombre Aereopuerto"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/GuardarFacturaBt"
-        app:layout_constraintEnd_toEndOf="@+id/GuardarFacturaBt"
+        app:layout_constraintBottom_toTopOf="@+id/GuardarCiudadBt"
+        app:layout_constraintEnd_toEndOf="@+id/GuardarCiudadBt"
         app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@+id/GuardarFacturaBt" />
+        app:layout_constraintStart_toStartOf="@+id/GuardarCiudadBt" />
 
     <TextView
         android:id="@+id/textView"
