@@ -115,6 +115,7 @@ class BListView : AppCompatActivity() {
                 )
             }
         )
+
         val dialogo = builder.create()
         dialogo.show()
     }
