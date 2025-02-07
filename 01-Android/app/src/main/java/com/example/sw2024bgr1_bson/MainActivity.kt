@@ -38,6 +38,29 @@ class MainActivity : AppCompatActivity() {
             .setOnClickListener {
                 irActividad(BListView::class.java)
             }
+
+        val botonImplicito = findViewById<Button>(R.id.btn_ir_intent_implicito)
+        botonImplicito
+            .setOnClickListener{
+                val intentConRespuesta = Intent(
+                    Intent.ACTION_PICK,
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+                )
+                callbackContenidoIntentImplicito.launch(intentConRespuesta)
+            }
+
+        val botonExplicito = findViewById<Button>(R.id.btn_ir_intent_explicito)
+        botonExplicito
+            .setOnClickListener{
+                val intentExplixito = Intent(
+                    this, CIntentExplicitoParametros::class.java
+                )
+                intentExplixito.putExtra("Nombre", "Brandon")
+                intentExplixito.putExtra("Apellido", "Oña")
+                intentExplixito.putExtra("Edad", "34")
+                callbackContenidoIntentExplicito.launch(intentExplixito)
+            }
+
     }
 
     fun irActividad(clase:Class<*>){
@@ -58,13 +81,13 @@ class MainActivity : AppCompatActivity() {
         result->
         if(result.resultCode== Activity.RESULT_OK){
             if(result.data != null){
-                val data = result.data?.getStringExtra("NombreModificado")
+                val data = result.data?.getStringExtra("nombreModificado")
                 mostrarSnackbar("$data")
             }
         }
     }
 
-    val callbackContenidoImplicito=
+    val callbackContenidoIntentImplicito=
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ){
@@ -89,27 +112,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    val botonImplicito = findViewById<Button>(R.id.btn_ir_intent_implicito)
-    botonImplicito
-        .setOnClickListener{
-            val intentConRespuesta = Intent(
-                Intent.ACTION_PICK,
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI
-            )
-            callbackContenidoIntentExplicito.launch(intentConRespuesta)
-        }
 
-    val botonExplicito = findViewById<Button>(R.id.btn_ir_intent_explicito)
-    botonExplicito
-        .setOnClickListener{
-            val intentExplixito = Intent(
-                this, CIntentExplicitoParametros::class.java
-            )
-            intentExplixito.putExtra("Nombre", "Brandon")
-            intentExplixito.putExtra("Apellido", "Oña")
-            intentExplixito.putExtra("Edad", "34")
-            callbackContenidoIntentExplicito.launch(intentExplixito)
-        }
 
 
 }
