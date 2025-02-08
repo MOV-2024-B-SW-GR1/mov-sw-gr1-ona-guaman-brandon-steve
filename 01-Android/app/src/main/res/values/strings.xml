@@ -3,4 +3,9 @@
     <string name="saludo">HELLO MY FRIENDS</string>
     <color name="saludo_color">#0FCC18</color>
     <color name="fondo_color">#FFFFFF</color>
+    <string-array name="string_array_opciones_dialogo">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercole</item>
+    </string-array>
 </resources>

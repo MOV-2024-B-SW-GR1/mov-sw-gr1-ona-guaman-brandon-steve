@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //Inicializar la BDD
+        EBaseDeDatos.tablaEntrenador=ESqliteHelperEntrenador(this)
 
         val botonCicloVida = findViewById<Button>(R.id.cl_ciclo_vida)
         botonCicloVida
@@ -59,6 +61,11 @@ class MainActivity : AppCompatActivity() {
                 intentExplixito.putExtra("Apellido", "Oña")
                 intentExplixito.putExtra("Edad", "34")
                 callbackContenidoIntentExplicito.launch(intentExplixito)
+            }
+        val botonIrSqlite = findViewById<Button>(R.id.btn_sqlite)
+        botonIrSqlite
+            .setOnClickListener {
+                irActividad(ECrudEntrenador::class.java)
             }
 
     }
