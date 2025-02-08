@@ -21,11 +21,12 @@ class CIntentExplicitoParametros : AppCompatActivity() {
         val nombre = intent.getStringExtra("Nombre")
         val apellido = intent.getStringExtra("Apellido")
         val edad = intent.getIntExtra("Edad",0)
+        val entrenador = intent.getParcelableExtra<BEntrenador>("entrenador")
         val boton = findViewById<Button>(R.id.btn_devolver_respuesta)
         boton.setOnClickListener{
             val intentDevolverRespuesta = Intent()
             intentDevolverRespuesta.putExtra(
-                "nombreModificado", "$nombre, $edad, $apellido"
+                "nombreModificado", "$nombre, $edad, $apellido, ${entrenador.toString()}"
             )
             setResult(RESULT_OK, intentDevolverRespuesta)
             finish()
