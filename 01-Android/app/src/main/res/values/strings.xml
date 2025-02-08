@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">sw2024bgr1_bson</string>
+    <string name="app_name" translatable="false">sw2024bgr1_bson</string>
     <string name="saludo">HELLO MY FRIENDS</string>
     <color name="saludo_color">#0FCC18</color>
     <color name="fondo_color">#FFFFFF</color>
