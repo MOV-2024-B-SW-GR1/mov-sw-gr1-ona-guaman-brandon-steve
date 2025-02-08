@@ -1,5 +1,6 @@
 package com.example.sw2024bgr1_bson
 
+
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -10,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.snackbar.Snackbar
 
 class ECrudEntrenador : AppCompatActivity() {
-    fun mostrarSnackbar(texto:String){
+    fun mostrarSnackbar(texto: String){
         val snack = Snackbar.make(
             findViewById(R.id.main),
             texto,
@@ -27,7 +28,7 @@ class ECrudEntrenador : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        //Buscar Entrenador
+        // Buscar entrenador
         val botonBuscarBDD = findViewById<Button>(R.id.btn_buscar_bdd)
         botonBuscarBDD.setOnClickListener {
             val id = findViewById<EditText>(R.id.input_id)
@@ -50,9 +51,12 @@ class ECrudEntrenador : AppCompatActivity() {
         botonEliminarBDD.setOnClickListener {
             val id = findViewById<EditText>(R.id.input_id)
             val respuesta = EBaseDeDatos.tablaEntrenador!!
-                .eliminarEntrenador((id.text.toString().toInt()))
-            if(respuesta) mostrarSnackbar("Ent. eliminado") else mostrarSnackbar("No encontrado")
+                .eliminarEntrenador(id.text.toString().toInt())
+            if(respuesta) mostrarSnackbar("Ent. elim") else mostrarSnackbar("No enc.")
         }
+
+
+
         val botonCrearBDD = findViewById<Button>(R.id.btn_crear_bdd)
         botonCrearBDD.setOnClickListener {
             val nombre = findViewById<EditText>(R.id.input_nombre)
@@ -62,10 +66,10 @@ class ECrudEntrenador : AppCompatActivity() {
                     nombre.text.toString(),
                     descripcion.text.toString()
                 )
-            if(respuesta) mostrarSnackbar("Entrenador creado") else mostrarSnackbar("Fallo")
+            if(respuesta) mostrarSnackbar("Entr. creado") else mostrarSnackbar("Fallo")
         }
-        val botonActulizarBDD = findViewById<Button>(R.id.btn_actualizar_bdd)
-        botonActulizarBDD.setOnClickListener {
+        val botonActualizarBDD = findViewById<Button>(R.id.btn_actualizar_bdd)
+        botonActualizarBDD.setOnClickListener {
             val id = findViewById<EditText>(R.id.input_id)
             val nombre = findViewById<EditText>(R.id.input_nombre)
             val descripcion = findViewById<EditText>(R.id.input_descripcion)
@@ -75,7 +79,7 @@ class ECrudEntrenador : AppCompatActivity() {
                     descripcion.text.toString(),
                     id.text.toString().toInt()
                 )
-            if(respuesta) mostrarSnackbar("Entrenador Actualizado") else mostrarSnackbar("Fallo")
+            if(respuesta) mostrarSnackbar("Entr. actua") else mostrarSnackbar("Fallo")
         }
     }
 }

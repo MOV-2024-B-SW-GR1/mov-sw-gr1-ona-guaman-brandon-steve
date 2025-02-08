@@ -1,6 +1,5 @@
 package com.example.sw2024bgr1_bson
 
-import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.ContextMenu
@@ -18,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.snackbar.Snackbar
 
 class BListView : AppCompatActivity() {
-    var arreglo = BBaseDatosMemoria.arregloEntrenador
+    val arreglo = BBaseDatosMemoria.arregloBEntrenador
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,7 +29,7 @@ class BListView : AppCompatActivity() {
         }
         val listView = findViewById<ListView>(R.id.lv_list_view)
         val adaptador = ArrayAdapter(
-            this,
+            this, // contexto
             android.R.layout.simple_list_item_1, // XML que vamos a usar
             arreglo
         )
@@ -38,25 +37,20 @@ class BListView : AppCompatActivity() {
         adaptador.notifyDataSetChanged()
         val botonAnadirListView = findViewById<Button>(R.id.btn_anadir_list_view)
         botonAnadirListView
-            .setOnClickListener { (anadirEntrenador(adaptador)) }
+            .setOnClickListener { anadirEntrenador(adaptador) }
         registerForContextMenu(listView)
     }
-    fun anadirEntrenador(adaptador: ArrayAdapter<BEntrenador>){
-        arreglo.add(BEntrenador(4,"Wendy","d@d.com"))
-        adaptador.notifyDataSetChanged()
-
-    }
-    var posicionItemSeleccionado = -1
+    var posicionItemSeleccionado = -1 // VARIABLE GLOBAL
     override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
         menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
+    ){
         super.onCreateContextMenu(menu, v, menuInfo)
-        //llenamos opciones del menu
+        // llenamos opciones del menu
         val inflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
-        //Obtener ID
+        // obtener id
         val info = menuInfo as AdapterView.AdapterContextMenuInfo
         val posicion = info.position
         posicionItemSeleccionado = posicion
@@ -68,7 +62,7 @@ class BListView : AppCompatActivity() {
                 mostrarSnackbar("$posicionItemSeleccionado")
                 return true
             }
-            R.id.mi_eliminar -> {
+            R.id.mi_eliminar ->{
                 mostrarSnackbar("${posicionItemSeleccionado}")
                 abrirDialogo()
                 return true
@@ -76,7 +70,7 @@ class BListView : AppCompatActivity() {
             else -> super.onContextItemSelected(item)
         }
     }
-    fun mostrarSnackbar(texto:String){
+    fun mostrarSnackbar(texto: String){
         val snack = Snackbar.make(
             findViewById(R.id.main),
             texto,
@@ -89,9 +83,8 @@ class BListView : AppCompatActivity() {
         builder.setTitle("Desea Eliminar")
         builder.setPositiveButton(
             "Aceptar",
-            DialogInterface.OnClickListener{
-                dialog, which ->
-                mostrarSnackbar("Eliminar Aceptado")
+            DialogInterface.OnClickListener{ dialog, which ->
+                mostrarSnackbar("Eliminar aceptado")
             }
         )
         builder.setNegativeButton(
@@ -102,21 +95,24 @@ class BListView : AppCompatActivity() {
             R.array.string_array_opciones_dialogo
         )
         val seleccionPrevia = booleanArrayOf(
-            true, false, false
+            true,false,false
         )
         builder.setMultiChoiceItems(
             opciones,
             seleccionPrevia,
             {
-                dialog,
-                which,
-                isChecked -> mostrarSnackbar(
-                    "${which} $isChecked"
-                )
+                    dialog,
+                    which,
+                    isChecked -> mostrarSnackbar(
+                "${which} $isChecked"
+            )
             }
         )
-
         val dialogo = builder.create()
         dialogo.show()
+    }
+    fun anadirEntrenador(adaptador: ArrayAdapter<BEntrenador>){
+        arreglo.add(BEntrenador(4,"Wendy","d@d.com"))
+        adaptador.notifyDataSetChanged()
     }
 }

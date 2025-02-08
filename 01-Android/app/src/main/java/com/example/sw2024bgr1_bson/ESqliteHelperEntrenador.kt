@@ -50,7 +50,7 @@ class ESqliteHelperEntrenador(
         val parametrosConsultaDelete = arrayOf(id.toString())
         val resultadoEliminar = baseDatosEscritura
             .delete(
-                "ENTRENADOT", //TABLA
+                "ENTRENADOR", //TABLA
                 "id=?", //CONSULTA
                 parametrosConsultaDelete
             )
