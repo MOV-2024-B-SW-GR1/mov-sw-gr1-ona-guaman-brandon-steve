@@ -22,6 +22,8 @@ class CrearCiudadActivity : AppCompatActivity() {
         val poblacionEditText = findViewById<EditText>(R.id.poblacionCiudad)
         val esCapitaEditText = findViewById<EditText>(R.id.esCapital)
         val tieneAereopuertoEditText = findViewById<EditText>(R.id.tieneAereoPuerto)
+        val latitudEditText = findViewById<EditText>(R.id.etLatitudTienda)
+        val longitudEditText = findViewById<EditText>(R.id.etLongitudTienda)
         val guardarFacturaButton = findViewById<Button>(R.id.GuardarCiudadBt)
         //val paisId = intent.getIntExtra("paisId", 0)  // Asumiendo que el paisId es pasado a esta actividad
         val paisId = intent.getIntExtra("paisId", -1)
@@ -37,6 +39,8 @@ class CrearCiudadActivity : AppCompatActivity() {
             //val tieneAeropuerto = tieneAereopuertoEditText.text.toString().trim().lowercase()=="si"
             val esCapital = esCapitaEditText.text.toString().trim()
             val tieneAeropuerto = tieneAereopuertoEditText.text.toString()
+            val latitudText = latitudEditText.text.toString().trim()
+            val longitudText = longitudEditText.text.toString().trim()
 
             // Validar y convertir la población a Double
             val poblacion: Double = try {
@@ -46,9 +50,23 @@ class CrearCiudadActivity : AppCompatActivity() {
                 Toast.makeText(this, "Ingrese un valor numérico para la población", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            val latitud: Double = try {
+                latitudText.toDouble()
+            } catch (e: NumberFormatException) {
+                // Si no es un número válido, muestra un mensaje o maneja el error
+                Toast.makeText(this, "Ingrese un valor numérico para la población", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val longitud: Double = try {
+                longitudText.toDouble()
+            } catch (e: NumberFormatException) {
+                // Si no es un número válido, muestra un mensaje o maneja el error
+                Toast.makeText(this, "Ingrese un valor numérico para la población", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             // Guardar directamente en la base de datos
-            val id = gestorSQL.addCiudad(nombreCiudad, poblacion, esCapital, tieneAeropuerto, paisId)
+            val id = gestorSQL.addCiudad(nombreCiudad, poblacion, esCapital, tieneAeropuerto, paisId, latitud, longitud)
             if (id > 0) {
                 Log.d("CrearCiudadActivity", "Ciudad creada con ID: $id")
                 setResult(RESULT_OK)  // Indica que la ciudad fue creada con éxito

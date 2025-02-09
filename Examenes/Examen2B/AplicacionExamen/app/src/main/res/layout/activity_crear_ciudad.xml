@@ -19,13 +19,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/poblacionCiudad"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.658" />
+        app:layout_constraintVertical_bias="0.639" />
 
     <Button
         android:id="@+id/GuardarCiudadBt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="164dp"
+        android:layout_marginBottom="96dp"
         android:text="Guardar"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +37,7 @@
         android:id="@+id/poblacionCiudad"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="32dp"
         android:ems="10"
         android:hint="Poblacion (Millones)"
         android:inputType="text"
@@ -50,7 +50,7 @@
         android:id="@+id/esCapital"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="28dp"
         android:ems="10"
         android:hint="¿Es capital? si/no"
         android:inputType="text"
@@ -63,9 +63,35 @@
         android:id="@+id/tieneAereoPuerto"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="196dp"
         android:ems="10"
         android:hint="Nombre Aereopuerto"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/GuardarCiudadBt"
+        app:layout_constraintEnd_toEndOf="@+id/GuardarCiudadBt"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@+id/GuardarCiudadBt" />
+
+    <EditText
+        android:id="@+id/etLatitudTienda"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginBottom="124dp"
+        android:ems="10"
+        android:hint="Latitud"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/GuardarCiudadBt"
+        app:layout_constraintEnd_toEndOf="@+id/GuardarCiudadBt"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@+id/GuardarCiudadBt" />
+
+    <EditText
+        android:id="@+id/etLongitudTienda"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginBottom="48dp"
+        android:ems="10"
+        android:hint="Longitud"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/GuardarCiudadBt"
         app:layout_constraintEnd_toEndOf="@+id/GuardarCiudadBt"

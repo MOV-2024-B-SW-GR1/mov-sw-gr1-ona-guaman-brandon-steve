@@ -6,5 +6,7 @@ data class Ciudad(
     val poblacion: Double,
     val esCapital: String,
     val tieneAereopuerto: String,
-    val paisId: Int
+    val paisId: Int,
+    val latitud: Double,  // Nuevo campo
+    val longitud: Double  // Nuevo campo
 )

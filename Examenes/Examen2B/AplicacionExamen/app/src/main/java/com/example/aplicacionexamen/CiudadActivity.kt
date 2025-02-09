@@ -61,7 +61,8 @@ class CiudadActivity : AppCompatActivity() {
             return emptyList()
         }
         return gestorSQL.getCiudad(paisId).map { it.nombreCiudad + " - Población: " + it.poblacion +
-                "M - Capital?: " + it.esCapital + " - Aeropuerto: "+it.tieneAereopuerto }
+                "M - Capital?: " + it.esCapital + " - Aeropuerto: "+it.tieneAereopuerto +
+                " - Latitud: "+it.latitud + " - Logitud: "+it.longitud }
     }
 
     private fun updateListView() {
@@ -73,7 +74,8 @@ class CiudadActivity : AppCompatActivity() {
         val ciudades = gestorSQL.getCiudad(paisId)
         adapter.clear()
         adapter.addAll(ciudades.map { it.nombreCiudad + " - Población: " + it.poblacion +
-                "M - Capital?: " + it.esCapital + " - Aeropuerto: "+it.tieneAereopuerto })
+                "M - Capital?: " + it.esCapital + " - Aeropuerto: "+it.tieneAereopuerto +
+                " - Latitud: "+it.latitud + " - Logitud: "+it.longitud })
         adapter.notifyDataSetChanged()
     }
 
@@ -105,7 +107,15 @@ class CiudadActivity : AppCompatActivity() {
                 gestorSQL.deleteCiudad(ciudadSeleccionada.id)  // Ahora borra la ciudad correcta
                 updateListView()
             }
-            R.id.map -> showMap(ciudadSeleccionada.nombreCiudad)  // Asegurar que muestra el mapa correcto
+            //R.id.ver_ubicacion -> showMap(ciudadSeleccionada.nombreCiudad)  // Asegurar que muestra el mapa correcto
+            R.id.ver_ubicacion -> {
+                val intent = Intent(this, GGoogleMaps::class.java).apply {
+                    putExtra("LATITUD", ciudadSeleccionada.latitud)
+                    putExtra("LONGITUD", ciudadSeleccionada.longitud)
+                    putExtra("NOMBRE_TIENDA", ciudadSeleccionada.nombreCiudad)
+                }
+                startActivity(intent)
+            }
             else -> return super.onContextItemSelected(item)
         }
         return true
@@ -130,17 +140,19 @@ class CiudadActivity : AppCompatActivity() {
         builder.setTitle("Editar Ciudad")
 
         val input = EditText(this)
-        input.setText("${ciudad.nombreCiudad} - ${ciudad.poblacion} - ${ciudad.esCapital} - ${ciudad.tieneAereopuerto}")
+        input.setText("${ciudad.nombreCiudad} - ${ciudad.poblacion} - ${ciudad.esCapital} - ${ciudad.tieneAereopuerto}- ${ciudad.longitud}- ${ciudad.latitud}")
         builder.setView(input)
 
         builder.setPositiveButton("Guardar") { _, _ ->
             val parts = input.text.toString().split(" - ")
-            if (parts.size >= 4) {
+            if (parts.size >= 6) {
                 val poblacion = parts[1].toDoubleOrNull() ?: 0.0  // Manejo seguro de conversión
                 val esCapital = parts[2]
                 val tieneAeropuerto = parts[3]
+                val latitud = parts[4].toDoubleOrNull() ?: 0.0  // Manejo seguro de conversión
+                val longitud = parts[5].toDoubleOrNull() ?: 0.0  // Manejo seguro de conversión
 
-                gestorSQL.updateCiudad(ciudad.id, parts[0], poblacion, esCapital, tieneAeropuerto)
+                gestorSQL.updateCiudad(ciudad.id, parts[0], poblacion, esCapital, tieneAeropuerto, latitud, longitud)
                 updateListView()
             } else {
                 Log.e("CiudadActivity", "Error: Formato de entrada inválido")
@@ -152,7 +164,7 @@ class CiudadActivity : AppCompatActivity() {
     }
 
     //-------------------------------------------------------------------------
-    private fun showMap(ubicacion: String) {
+    /*private fun showMap(ubicacion: String) {
         val gmmIntentUri = Uri.parse("geo:0,0?q=${Uri.encode(ubicacion)}")
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
         mapIntent.setPackage("com.google.android.apps.maps")
@@ -161,6 +173,5 @@ class CiudadActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Google Maps no está instalado.", Toast.LENGTH_SHORT).show()
         }
-    }
-
+    }*/
 }

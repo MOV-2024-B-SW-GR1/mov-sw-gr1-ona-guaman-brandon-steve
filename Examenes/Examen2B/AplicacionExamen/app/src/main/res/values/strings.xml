@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AplicacionExamen</string>
+    <string name="title_activity_ggoogle_maps_placeholder">GGoogleMapsPlaceholder</string>
 </resources>

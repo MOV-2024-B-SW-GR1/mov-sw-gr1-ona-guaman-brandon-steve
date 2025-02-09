@@ -8,7 +8,7 @@
         android:id="@+id/delete"
         android:title="Eliminar" />
     <item
-        android:id="@+id/map"
-        android:title="Mapa" />
+        android:id="@+id/ver_ubicacion"
+        android:title="Ver en el Mapa" />
 
 </menu>

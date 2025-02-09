@@ -30,6 +30,8 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
                 esCapital INTEGER,
                 tieneAereopuerto INTEGER,
                 paisId INTEGER,
+                latitud REAL,  
+                longitud REAL,
                 FOREIGN KEY(paisId) REFERENCES Pais(id)
             )
         """
@@ -118,7 +120,7 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
     }
 //----------------------------------------------------------------
     // CRUD Operaciones para Ciudad
-    fun addCiudad(nombreCiudad: String, poblacion: Double, esCapital: String, tieneAereopuerto: String, paisId: Int): Long {
+    fun addCiudad(nombreCiudad: String, poblacion: Double, esCapital: String, tieneAereopuerto: String, paisId: Int, latitud: Double, longitud: Double): Long {
     if (paisId == -1) {
         Log.e("GestorSQL", "Error: paisId inválido al insertar ciudad")
         return -1
@@ -131,6 +133,8 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
             //put("tieneAereopuerto", if (tieneAereopuerto) 1 else 0) // Guardar tieneAereopuerto como 1 (true) o 0 (false)
             put("esCapital", esCapital)
             put("tieneAereopuerto", tieneAereopuerto)
+            put("latitud",latitud)
+            put("longitud", longitud)
             put("paisId", paisId)             // ID del país relacionado
         }
         //return db.insert("Ciudad", null, values)
@@ -148,7 +152,7 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         Log.d("GestorSQL", "Obteniendo ciudades para paisId: $paisId")  // 🟢 Log de depuración
 
         val db = this.readableDatabase
-        val projection = arrayOf("id", "nombreCiudad", "poblacion", "esCapital", "tieneAereopuerto", "paisId")
+        val projection = arrayOf("id", "nombreCiudad", "poblacion", "esCapital", "tieneAereopuerto","latitud","longitud", "paisId")
         val cursor = db.query(
             "Ciudad", projection,
             "paisId = ?", arrayOf(paisId.toString()), // Filtra por paisId
@@ -163,18 +167,20 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
                 val poblacion = getDouble(getColumnIndexOrThrow("poblacion"))
                 val esCapital = getString(getColumnIndexOrThrow("esCapital"))
                 val tieneAereopuerto = getString(getColumnIndexOrThrow("tieneAereopuerto"))
+                val latitud = getDouble(getColumnIndexOrThrow("latitud"))
+                val longitud = getDouble(getColumnIndexOrThrow("longitud"))
                 val paisIdDb = getInt(getColumnIndexOrThrow("paisId"))
 
                 Log.d("GestorSQL", "Ciudad encontrada en BD: ID=$id, Nombre=$nombreCiudad, paisId=$paisIdDb")  // 🟢 Log para verificar si se están recuperando ciudades
 
-                ciudades.add(Ciudad(id, nombreCiudad, poblacion, esCapital, tieneAereopuerto, paisIdDb))
+                ciudades.add(Ciudad(id, nombreCiudad, poblacion, esCapital, tieneAereopuerto, paisIdDb, latitud, longitud))
             }
         }
         cursor.close()
         return ciudades
     }
 
-    fun updateCiudad(id: Int, nombreCiudad: String, poblacion: Double, esCapital: String, tieneAereopuerto: String): Int {
+    fun updateCiudad(id: Int, nombreCiudad: String, poblacion: Double, esCapital: String, tieneAereopuerto: String, latitud: Double, longitud:Double): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put("nombreCiudad", nombreCiudad) // Actualiza el nombre de la ciudad
@@ -183,6 +189,8 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
             //put("tieneAereopuerto", if (tieneAereopuerto) 1 else 0) // Convierte tieneAereopuerto a 1 o 0
             put("esCapital", esCapital)
             put("tieneAereopuerto", tieneAereopuerto)
+            put("latitud", latitud)
+            put("longitud", longitud)
         }
         return db.update("Ciudad", values, "id=?", arrayOf(id.toString()))
     }
