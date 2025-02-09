@@ -105,7 +105,7 @@ class CiudadActivity : AppCompatActivity() {
                 gestorSQL.deleteCiudad(ciudadSeleccionada.id)  // Ahora borra la ciudad correcta
                 updateListView()
             }
-            //R.id.map -> showMap(ciudadSeleccionada.nombreCiudad)  // Asegurar que muestra el mapa correcto
+            R.id.map -> showMap(ciudadSeleccionada.nombreCiudad)  // Asegurar que muestra el mapa correcto
             else -> return super.onContextItemSelected(item)
         }
         return true
@@ -151,7 +151,7 @@ class CiudadActivity : AppCompatActivity() {
         builder.show()
     }
 
-    // ----------------------------------------------------====================
+    //-------------------------------------------------------------------------
     private fun showMap(ubicacion: String) {
         val gmmIntentUri = Uri.parse("geo:0,0?q=${Uri.encode(ubicacion)}")
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
