@@ -1,6 +1,7 @@
 package com.example.proyectoIIB
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
@@ -22,17 +23,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: ArrayAdapter<String>
     private val gestorSQL: GestorSQL = GestorSQL(this) // Instancia de la clase GestorSQL
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         listView = findViewById(R.id.listViewPaises)
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, loadPais())
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, loadCategorias())
         listView.adapter = adapter
 
-        val crearConcesionarioButton = findViewById<Button>(R.id.crearPais)
+        val crearConcesionarioButton = findViewById<Button>(R.id.crearCategorias)
         crearConcesionarioButton.setOnClickListener {
-            val intent = Intent(this, CrearPaisActivity::class.java)
+            val intent = Intent(this, CrearCategoriaActivity::class.java)
             startActivityForResult(intent, 1)  // Use request code to identify the result
         }
 
@@ -45,8 +47,8 @@ class MainActivity : AppCompatActivity() {
         updateListView()
     }
 
-    private fun loadPais(): MutableList<String> {
-        return gestorSQL.getPais().map { it.nombrePais + "- Codigo: " + it.codigo + "- Fundación: " + it.fechaFundacion }.toMutableList()
+    private fun loadCategorias(): MutableList<String> {
+        return gestorSQL.getCategoria().map { it.nombreCategoria + "- Descripcion: " + it.Descripcion + "- Fecha Creacion: " + it.fechaCreacion }.toMutableList()
     }
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
@@ -57,12 +59,12 @@ class MainActivity : AppCompatActivity() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
         when (item.itemId) {
-            R.id.edit -> editPais(info.position)
+            R.id.edit -> editCategoria(info.position)
             R.id.delete -> {
-                gestorSQL.deletePais(gestorSQL.getPais()[info.position].id)
+                gestorSQL.deleteCategoria(gestorSQL.getCategoria()[info.position].id)
                 updateListView()
             }
-            R.id.view_ciudades -> viewCiudades(info.position)
+            R.id.view_ciudades -> viewTareas(info.position)
             else -> return super.onContextItemSelected(item)
         }
         return true
@@ -71,22 +73,22 @@ class MainActivity : AppCompatActivity() {
     //private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
-    private fun editPais(position: Int) {
-        val client = gestorSQL.getPais()[position]
+    private fun editCategoria(position: Int) {
+        val client = gestorSQL.getCategoria()[position]
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Editar Pais")
         val input = EditText(this)
         input.inputType = InputType.TYPE_CLASS_TEXT
 
         // Formatea la fecha para mostrarla como cadena
-        val formattedDate = dateFormat.format(client.fechaFundacion)
+        val formattedDate = dateFormat.format(client.fechaCreacion)
         //input.setText(client.nombrePais + " " + client.codigo + " "+ client.fechaFundacion)
-        input.setText("${client.nombrePais} ${client.codigo} $formattedDate")
+        input.setText("${client.nombreCategoria} - ${client.Descripcion} - $formattedDate")
         builder.setView(input)
 
         builder.setPositiveButton("Guardar") { dialog, which ->
-            val parts = input.text.toString().split(" ")
-            gestorSQL.updatePais(client.id, parts[0], parts.getOrElse(1) { "" }, parts.getOrElse(2){""})
+            val parts = input.text.toString().split(" - ")
+            gestorSQL.updateCategoria(client.id, parts[0], parts.getOrElse(1) { "" }, parts.getOrElse(2){""})
             updateListView()
         }
         builder.setNegativeButton("Cancelar") { dialog, which -> dialog.cancel() }
@@ -95,24 +97,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateListView() {
-        val paises = gestorSQL.getPais()
-        if (paises.isEmpty()) {
+        val categorias = gestorSQL.getCategoria()
+        if (categorias.isEmpty()) {
             Log.e("MainActivity", "No se encontraron países en la base de datos")
         } else {
-            Log.d("MainActivity", "Se encontraron ${paises.size} países en la base de datos")
+            Log.d("MainActivity", "Se encontraron ${categorias.size} países en la base de datos")
         }
 
         adapter.clear()
-        adapter.addAll(paises.map { it.nombrePais + " - Código: " + it.codigo + " - Fundación: " + it.fechaFundacion })
+        adapter.addAll(categorias.map { it.nombreCategoria + " - Descripcion: " + it.Descripcion + " - Fecha Creacion: " + it.fechaCreacion })
         adapter.notifyDataSetChanged()
     }
 
-    private fun viewCiudades(position: Int) {
-        val pais = gestorSQL.getPais()[position]
-        Log.d("MainActivity", "Abriendo CiudadActivity con paisId: ${pais.id}")  //Log de verificación
+    private fun viewTareas(position: Int) {
+        val categoria = gestorSQL.getCategoria()[position]
+        Log.d("MainActivity", "Abriendo CiudadActivity con paisId: ${categoria.id}")  //Log de verificación
 
-        val intent = Intent(this, CiudadActivity::class.java)
-        intent.putExtra("paisId", pais.id)
+        val intent = Intent(this, TareaActivity::class.java)
+        intent.putExtra("categoriaId", categoria.id)
         startActivity(intent)
     }
 

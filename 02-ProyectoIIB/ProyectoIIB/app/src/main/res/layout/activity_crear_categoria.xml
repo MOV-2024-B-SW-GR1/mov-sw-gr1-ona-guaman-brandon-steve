@@ -6,48 +6,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_degradado"
-    tools:context=".CrearPaisActivity">
+    tools:context=".CrearCategoriaActivity">
 
     <EditText
-        android:id="@+id/NombrePais"
+        android:id="@+id/NombreCategoria"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="208dp"
         android:ems="10"
-        android:hint=" Nombre del Pais"
+        android:hint=" Nombre Categoria"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/codigoPais"
+        app:layout_constraintEnd_toEndOf="@+id/descripcion"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/codigoPais"
+        app:layout_constraintStart_toStartOf="@+id/descripcion"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
-        android:id="@+id/codigoPais"
+        android:id="@+id/descripcion"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="36dp"
         android:ems="10"
-        android:hint="Codigo del Pais"
+        android:hint="Descripcion"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NombrePais" />
+        app:layout_constraintTop_toBottomOf="@+id/NombreCategoria" />
 
     <EditText
-        android:id="@+id/fechaFundacion"
+        android:id="@+id/fechaCreacion"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Fundación (yyyy-MM-DD)"
+        android:hint="F Creacion (yyyy-MM-DD)"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/codigoPais"
+        app:layout_constraintEnd_toEndOf="@+id/descripcion"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/codigoPais"
-        app:layout_constraintTop_toBottomOf="@+id/codigoPais" />
+        app:layout_constraintStart_toStartOf="@+id/descripcion"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
 
     <Button
-        android:id="@+id/guardarPais"
+        android:id="@+id/guardarCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guardar"
@@ -55,7 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fechaFundacion"
+        app:layout_constraintTop_toBottomOf="@+id/fechaCreacion"
         app:layout_constraintVertical_bias="0.338" />
 
     <TextView

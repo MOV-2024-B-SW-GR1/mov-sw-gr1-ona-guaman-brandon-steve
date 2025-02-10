@@ -8,19 +8,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 
-class CrearPaisActivity : AppCompatActivity() {
+class CrearCategoriaActivity : AppCompatActivity() {
     private lateinit var gestorSQL: GestorSQL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_crear_pais)
+        setContentView(R.layout.activity_crear_categoria)
 
         gestorSQL = GestorSQL(this)  // Instancia de GestorSQL
 
-        val nombrePaisEditText = findViewById<EditText>(R.id.NombrePais)
-        val codigoEditText = findViewById<EditText>(R.id.codigoPais)
-        val fechaFEditText = findViewById<EditText>(R.id.fechaFundacion)
-        val guardarButton = findViewById<Button>(R.id.guardarPais)
+        val nombrePaisEditText = findViewById<EditText>(R.id.NombreCategoria)
+        val codigoEditText = findViewById<EditText>(R.id.descripcion)
+        val fechaFEditText = findViewById<EditText>(R.id.fechaCreacion)
+        val guardarButton = findViewById<Button>(R.id.guardarCategoria)
 
         //val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
@@ -32,7 +32,7 @@ class CrearPaisActivity : AppCompatActivity() {
 
             try {
                 dateFormat.parse(fechaFun) // Intenta analizar la fecha
-                val id = gestorSQL.addPais(nombreP, codigo, fechaFun)
+                val id = gestorSQL.addCategoria(nombreP, codigo, fechaFun)
                 if (id > 0) {
                     Log.d("CrearPaisActivity", "País creado con ID: $id")
                     setResult(RESULT_OK)

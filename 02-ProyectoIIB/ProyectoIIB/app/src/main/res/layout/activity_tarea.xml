@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_degradado"
-    tools:context=".CiudadActivity">
+    tools:context=".TareaActivity">
 
     <TextView
         android:id="@+id/AutosV"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/CrearCiudadBt"
+        android:id="@+id/CrearTarea"
         android:layout_width="128dp"
         android:layout_height="47dp"
         android:layout_marginTop="212dp"

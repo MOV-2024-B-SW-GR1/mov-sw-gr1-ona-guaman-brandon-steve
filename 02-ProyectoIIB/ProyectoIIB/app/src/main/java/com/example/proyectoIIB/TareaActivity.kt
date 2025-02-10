@@ -14,9 +14,10 @@ import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
 
 
-class CiudadActivity : AppCompatActivity() {
+class TareaActivity : AppCompatActivity() {
     private lateinit var listView: ListView
     private lateinit var adapter: ArrayAdapter<String>
     private val gestorSQL: GestorSQL = GestorSQL(this)
@@ -24,19 +25,19 @@ class CiudadActivity : AppCompatActivity() {
     private var paisId: Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ciudad)
+        setContentView(R.layout.activity_tarea)
 
         listView = findViewById(R.id.CiudadesListView)
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, loadCiudades())
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, loadTareas())
         listView.adapter = adapter
         registerForContextMenu(listView)
 
-        val crearFacturaButton = findViewById<Button>(R.id.CrearCiudadBt)
+        val crearFacturaButton = findViewById<Button>(R.id.CrearTarea)
         crearFacturaButton.setOnClickListener {
-            val paisId = intent.getIntExtra("paisId", -1)  // Obtiene el paisId correctamente
-            val intent = Intent(this, CrearCiudadActivity::class.java)
+            val categoriaId = intent.getIntExtra("categoriaId", -1)  // Obtiene el paisId correctamente
+            val intent = Intent(this, CrearTareaActivity::class.java)
             //intent.putExtra("paisId", intent.getIntExtra("paisId", -1)) // Pasar el paisId correcto
-            intent.putExtra("paisId", paisId)
+            intent.putExtra("categoriaId", categoriaId)
             startActivityForResult(intent, 2)
         }
 
@@ -51,28 +52,29 @@ class CiudadActivity : AppCompatActivity() {
         updateListView() // Se asegura de actualizar la lista cuando se vuelve a la actividad
     }
 
-    private fun loadCiudades(): List<String> {
+    private fun loadTareas(): List<String> {
         /*return gestorSQL.getCiudad().map { it.nombreCiudad + " - Población: " + it.poblacion +
                 "M - Capital?: " + it.esCapital + " - Aereopuerto: "+it.tieneAereopuerto }*/
-        val paisId = intent.getIntExtra("paisId", -1)  // Obtiene el paisId del intent
-        if (paisId == -1) {
+        val categoriaId = intent.getIntExtra("categoriaId", -1)  // Obtiene el paisId del intent
+        if (categoriaId == -1) {
             Log.e("CiudadActivity", "Error: paisId no recibido")
             return emptyList()
         }
-        return gestorSQL.getCiudad(paisId).map { it.nombreCiudad + " - Población: " + it.poblacion +
-                "M - Capital?: " + it.esCapital + " - Aeropuerto: "+it.tieneAereopuerto }
+        return gestorSQL.getTarea(categoriaId).map { it.nombreTarea + " - Descripcion: " + it.descricionT + "Fecha Vencimiento: " + it.fechaVencimiento + " - Prioridad: "+it.prioridad + " - Estado: "+it.estado }
     }
 
+    //private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+
     private fun updateListView() {
-        val paisId = intent.getIntExtra("paisId", -1)
-        if (paisId == -1) {
+        val categoriaId = intent.getIntExtra("categoriaId", -1)
+        if (categoriaId == -1) {
             Log.e("CiudadActivity", "Error: No se pudo obtener el paisId en updateListView()")
             return
         }
-        val ciudades = gestorSQL.getCiudad(paisId)
+        val tareas = gestorSQL.getTarea(categoriaId)
         adapter.clear()
-        adapter.addAll(ciudades.map { it.nombreCiudad + " - Población: " + it.poblacion +
-                "M - Capital?: " + it.esCapital + " - Aeropuerto: "+it.tieneAereopuerto })
+        adapter.addAll(tareas.map { it.nombreTarea + " - Descripcion: " + it.descricionT + " - Fecha Vencimiento: " + it.fechaVencimiento + " - Prioridad: "+it.prioridad + " - Estado: " +it.estado })
         adapter.notifyDataSetChanged()
     }
 
@@ -82,26 +84,26 @@ class CiudadActivity : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        val paisId = intent.getIntExtra("paisId", -1)
-        if (paisId == -1) {
+        val categoriaId = intent.getIntExtra("categoriaId", -1)
+        if (categoriaId == -1) {
             Log.e("CiudadActivity", "Error: paisId no recibido")
             return super.onContextItemSelected(item)
         }
 
-        val ciudadesDelPais = gestorSQL.getCiudad(paisId)  // Obtener solo las ciudades del país
+        val tareasDeCategoria = gestorSQL.getTarea(categoriaId)  // Obtener solo las ciudades del país
         val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
 
-        if (info.position < 0 || info.position >= ciudadesDelPais.size) {
+        if (info.position < 0 || info.position >= tareasDeCategoria.size) {
             Log.e("CiudadActivity", "Error: Posición inválida en la lista de ciudades")
             return super.onContextItemSelected(item)
         }
 
-        val ciudadSeleccionada = ciudadesDelPais[info.position]  // Obtener la ciudad correcta
+        val tareaSeleccionada = tareasDeCategoria[info.position]  // Obtener la ciudad correcta
 
         when (item.itemId) {
-            R.id.edit -> editCiudad(info.position)  // Asegurar que edita la ciudad correcta
+            R.id.edit -> editTarea(info.position)  // Asegurar que edita la ciudad correcta
             R.id.delete -> {
-                gestorSQL.deleteCiudad(ciudadSeleccionada.id)  // Ahora borra la ciudad correcta
+                gestorSQL.deleteTarea(tareaSeleccionada.id)  // Ahora borra la ciudad correcta
                 updateListView()
             }
             //R.id.map -> showMap(ciudadSeleccionada.nombreCiudad)  // Asegurar que muestra el mapa correcto
@@ -110,36 +112,41 @@ class CiudadActivity : AppCompatActivity() {
         return true
     }
 
-    private fun editCiudad(position: Int) {
-        val paisId = intent.getIntExtra("paisId", -1)
-        if (paisId == -1) {
+    private fun editTarea(position: Int) {
+        val categoriaId = intent.getIntExtra("categoriaId", -1)
+        if (categoriaId == -1) {
             Log.e("CiudadActivity", "Error: paisId no recibido")
             return
         }
 
-        val ciudadesDelPais = gestorSQL.getCiudad(paisId)  // Obtener solo las ciudades de este país
-        if (position < 0 || position >= ciudadesDelPais.size) {
+        val tareasDeCategoria = gestorSQL.getTarea(categoriaId)  // Obtener solo las ciudades de este país
+        if (position < 0 || position >= tareasDeCategoria.size) {
             Log.e("CiudadActivity", "Error: posición inválida en la lista de ciudades")
             return
         }
 
-        val ciudad = ciudadesDelPais[position]  // Obtener la ciudad en la posición correcta
+        val tarea = tareasDeCategoria[position]  // Obtener la ciudad en la posición correcta
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Editar Ciudad")
 
+        // Formatea la fecha para mostrarla como cadena
+        val formattedDate = dateFormat.format(tarea.fechaVencimiento)
+
         val input = EditText(this)
-        input.setText("${ciudad.nombreCiudad} - ${ciudad.poblacion} - ${ciudad.esCapital} - ${ciudad.tieneAereopuerto}")
+        input.setText("${tarea.nombreTarea} - ${tarea.descricionT} - $formattedDate - ${tarea.prioridad} - ${tarea.estado}")
         builder.setView(input)
 
         builder.setPositiveButton("Guardar") { _, _ ->
             val parts = input.text.toString().split(" - ")
-            if (parts.size >= 4) {
-                val poblacion = parts[1].toDoubleOrNull() ?: 0.0  // Manejo seguro de conversión
-                val esCapital = parts[2]
-                val tieneAeropuerto = parts[3]
+            if (parts.size >= 5) {
+                //val nombreTareas = parts[1]
+                val descripcion = parts[1]
+                val fechaVencimiento = parts[2]
+                val prioridad = parts[3]
+                val estado = parts[4]
 
-                gestorSQL.updateCiudad(ciudad.id, parts[0], poblacion, esCapital, tieneAeropuerto)
+                gestorSQL.updateTarea(tarea.id, parts[0],descripcion, fechaVencimiento, prioridad, estado)
                 updateListView()
             } else {
                 Log.e("CiudadActivity", "Error: Formato de entrada inválido")

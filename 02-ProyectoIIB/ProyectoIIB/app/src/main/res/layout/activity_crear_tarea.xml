@@ -6,24 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_degradado"
-    tools:context=".CrearCiudadActivity">
+    tools:context=".CrearTareaActivity">
 
     <EditText
-        android:id="@+id/nombreCiudad"
+        android:id="@+id/nombreTarea"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/poblacionCiudad"
-        app:layout_constraintEnd_toEndOf="@+id/poblacionCiudad"
+        app:layout_constraintBottom_toTopOf="@+id/descripcionT"
+        app:layout_constraintEnd_toEndOf="@+id/descripcionT"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/poblacionCiudad"
+        app:layout_constraintStart_toStartOf="@+id/descripcionT"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.845" />
+        app:layout_constraintVertical_bias="0.929" />
 
     <Button
-        android:id="@+id/GuardarCiudadBt"
+        android:id="@+id/GuardarTarea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="72dp"
@@ -35,43 +35,56 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/poblacionCiudad"
+        android:id="@+id/descripcionT"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Poblacion (Millones)"
+        android:hint="Descripcion"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/esCapital"
-        app:layout_constraintEnd_toEndOf="@+id/esCapital"
+        app:layout_constraintBottom_toTopOf="@+id/fechaCreacion"
+        app:layout_constraintEnd_toEndOf="@+id/fechaCreacion"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/esCapital" />
+        app:layout_constraintStart_toStartOf="@+id/fechaCreacion" />
 
     <EditText
-        android:id="@+id/esCapital"
+        android:id="@+id/fechaCreacion"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="¿Es capital? si/no"
+        android:hint="F Creacion (yyyy-MM-dd)"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/tieneAereoPuerto"
-        app:layout_constraintEnd_toEndOf="@+id/tieneAereoPuerto"
+        app:layout_constraintBottom_toTopOf="@+id/prioridad"
+        app:layout_constraintEnd_toEndOf="@+id/prioridad"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tieneAereoPuerto" />
+        app:layout_constraintStart_toStartOf="@+id/prioridad" />
 
     <EditText
-        android:id="@+id/tieneAereoPuerto"
+        android:id="@+id/prioridad"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Nombre Aereopuerto"
+        android:hint="Prioridad"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/GuardarCiudadBt"
-        app:layout_constraintEnd_toEndOf="@+id/GuardarCiudadBt"
+        app:layout_constraintBottom_toTopOf="@+id/estado"
+        app:layout_constraintEnd_toEndOf="@+id/estado"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/estado" />
+
+    <EditText
+        android:id="@+id/estado"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="Estado"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/GuardarTarea"
+        app:layout_constraintEnd_toEndOf="@+id/GuardarTarea"
         app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@+id/GuardarCiudadBt" />
+        app:layout_constraintStart_toStartOf="@+id/GuardarTarea" />
 
     <TextView
         android:id="@+id/textView"
@@ -87,8 +100,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.771" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -100,6 +112,6 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.188" />
+        app:layout_constraintVertical_bias="0.169" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,13 +35,13 @@
         </activity>
 
         <activity
-            android:name=".CiudadActivity"
+            android:name=".TareaActivity"
             android:exported="false" />
         <activity
-            android:name=".CrearCiudadActivity"
+            android:name=".CrearTareaActivity"
             android:exported="false" />
         <activity
-            android:name=".CrearPaisActivity"
+            android:name=".CrearCategoriaActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
