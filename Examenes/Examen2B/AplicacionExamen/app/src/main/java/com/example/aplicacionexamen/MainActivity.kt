@@ -81,11 +81,11 @@ class MainActivity : AppCompatActivity() {
         // Formatea la fecha para mostrarla como cadena
         val formattedDate = dateFormat.format(client.fechaFundacion)
         //input.setText(client.nombrePais + " " + client.codigo + " "+ client.fechaFundacion)
-        input.setText("${client.nombrePais} ${client.codigo} $formattedDate")
+        input.setText("${client.nombrePais} - ${client.codigo} - $formattedDate")
         builder.setView(input)
 
         builder.setPositiveButton("Guardar") { dialog, which ->
-            val parts = input.text.toString().split(" ")
+            val parts = input.text.toString().split(" - ")
             gestorSQL.updatePais(client.id, parts[0], parts.getOrElse(1) { "" }, parts.getOrElse(2){""})
             updateListView()
         }

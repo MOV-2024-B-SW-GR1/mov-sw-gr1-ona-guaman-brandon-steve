@@ -112,7 +112,7 @@ class CiudadActivity : AppCompatActivity() {
                 val intent = Intent(this, GGoogleMaps::class.java).apply {
                     putExtra("LATITUD", ciudadSeleccionada.latitud)
                     putExtra("LONGITUD", ciudadSeleccionada.longitud)
-                    putExtra("NOMBRE_TIENDA", ciudadSeleccionada.nombreCiudad)
+                    putExtra("NOMBRE_CIUDAD", ciudadSeleccionada.nombreCiudad)
                 }
                 startActivity(intent)
             }
@@ -140,7 +140,7 @@ class CiudadActivity : AppCompatActivity() {
         builder.setTitle("Editar Ciudad")
 
         val input = EditText(this)
-        input.setText("${ciudad.nombreCiudad} - ${ciudad.poblacion} - ${ciudad.esCapital} - ${ciudad.tieneAereopuerto}- ${ciudad.longitud}- ${ciudad.latitud}")
+        input.setText("${ciudad.nombreCiudad} - ${ciudad.poblacion} - ${ciudad.esCapital} - ${ciudad.tieneAereopuerto} - ${ciudad.longitud} - ${ciudad.latitud}")
         builder.setView(input)
 
         builder.setPositiveButton("Guardar") { _, _ ->
@@ -163,15 +163,5 @@ class CiudadActivity : AppCompatActivity() {
         builder.show()
     }
 
-    //-------------------------------------------------------------------------
-    /*private fun showMap(ubicacion: String) {
-        val gmmIntentUri = Uri.parse("geo:0,0?q=${Uri.encode(ubicacion)}")
-        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-        mapIntent.setPackage("com.google.android.apps.maps")
-        if (mapIntent.resolveActivity(packageManager) != null) {
-            startActivity(mapIntent)
-        } else {
-            Toast.makeText(this, "Google Maps no está instalado.", Toast.LENGTH_SHORT).show()
-        }
-    }*/
+
 }

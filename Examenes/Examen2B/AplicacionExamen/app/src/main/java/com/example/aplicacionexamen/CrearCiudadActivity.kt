@@ -54,14 +54,14 @@ class CrearCiudadActivity : AppCompatActivity() {
                 latitudText.toDouble()
             } catch (e: NumberFormatException) {
                 // Si no es un número válido, muestra un mensaje o maneja el error
-                Toast.makeText(this, "Ingrese un valor numérico para la población", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Ingrese un valor numérico", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val longitud: Double = try {
                 longitudText.toDouble()
             } catch (e: NumberFormatException) {
                 // Si no es un número válido, muestra un mensaje o maneja el error
-                Toast.makeText(this, "Ingrese un valor numérico para la población", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Ingrese un valor numérico", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

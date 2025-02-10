@@ -52,36 +52,36 @@ class GGoogleMaps : AppCompatActivity() {
             insets
         }
 
-        // Recuperar los datos enviados desde la actividad anterior
+        // Recuperar los datos enviados desde la actividad CiudadActivity
         val latitud = intent.getDoubleExtra("LATITUD", 0.0)
         val longitud = intent.getDoubleExtra("LONGITUD", 0.0)
-        val nombreTienda = intent.getStringExtra("NOMBRE_TIENDA") ?: "Tienda Desconocida"
+        val nombreCiudad = intent.getStringExtra("NOMBRE_CIUDAD") ?: "Ciudad Desconocida"
 
         solicitarPermisos()
-        inicializarLogicaMapa(latitud, longitud, nombreTienda)
+        inicializarLogicaMapa(latitud, longitud, nombreCiudad)
     }
 
-    fun inicializarLogicaMapa(latitud: Double, longitud: Double, nombreTienda: String) {
+    fun inicializarLogicaMapa(latitud: Double, longitud: Double, nombreCiudad: String) {
         val fragmentoMapa = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         fragmentoMapa.getMapAsync { googleMap ->
             with(googleMap) {
                 mapa = googleMap
                 establecerConfiguracionMapa()
-                moverUbicacionTienda(latitud, longitud, nombreTienda)  // Pasar los datos a moverUbicacionTienda
+                moverUbicacionCiudad(latitud, longitud, nombreCiudad)  // Pasar los datos a moverUbicacionTienda
                 //escucharListeners()
             }
         }
     }
 
-    fun moverUbicacionTienda(latitud: Double, longitud: Double, nombreTienda: String) {
-        val ubicacionTienda = LatLng(latitud, longitud)  // Usar la latitud y longitud que se pasaron
-        // Crear el marcador para la tienda
-        val titulo = nombreTienda
-        val marcadorTienda = anadirMarcador(ubicacionTienda, titulo)
-        marcadorTienda.tag = titulo  // Usar el nombre de la tienda
+    fun moverUbicacionCiudad(latitud: Double, longitud: Double, nombreCiudad: String) {
+        val ubicacionCiudad = LatLng(latitud, longitud)  // Usamos la latitud y longitud que se pasaron
+        // Creacion del marcador para la ubicacion de la ciudad
+        val titulo = nombreCiudad
+        val marcadorCiudad = anadirMarcador(ubicacionCiudad, titulo)
+        marcadorCiudad.tag = titulo  // Usar el nombre ingresado de la ciudad
 
         // Mover la cámara al marcador y hacer zoom
-        moverCamaraConZoom(ubicacionTienda)
+        moverCamaraConZoom(ubicacionCiudad)
     }
 
     @SuppressLint("MissingPermission")
@@ -95,7 +95,7 @@ class GGoogleMaps : AppCompatActivity() {
         }
     }
 
-    fun moverCamaraConZoom(latLang: LatLng, zoom: Float = 17f) {
+    fun moverCamaraConZoom(latLang: LatLng, zoom: Float = 18f) {
         mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(latLang, zoom))
     }
 
