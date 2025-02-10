@@ -12,7 +12,7 @@
         android:id="@+id/NombrePais"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="208dp"
         android:ems="10"
         android:hint=" Nombre del Pais"
         android:inputType="text"
@@ -25,7 +25,7 @@
         android:id="@+id/codigoPais"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="Codigo del Pais"
         android:inputType="text"
@@ -37,7 +37,7 @@
         android:id="@+id/fechaFundacion"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Fundación (yyyy-MM-DD)"
         android:inputType="text"
@@ -56,19 +56,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fechaFundacion"
-        app:layout_constraintVertical_bias="0.256" />
+        app:layout_constraintVertical_bias="0.338" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="268dp"
         android:layout_height="58dp"
         android:background="@color/color1"
+        android:backgroundTint="#00FFFFFF"
         android:text="Nueva Categoría"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textColorLink="#2196F3"
         android:textSize="34sp"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:background="@drawable/categorias"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.256" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
