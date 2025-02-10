@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 class GGoogleMaps : AppCompatActivity() {
     private lateinit var mapa: GoogleMap
 
+
     val nombrePermisoFine = android.Manifest.permission.ACCESS_FINE_LOCATION
     val nombrePermisoCoarse = android.Manifest.permission.ACCESS_COARSE_LOCATION
 
