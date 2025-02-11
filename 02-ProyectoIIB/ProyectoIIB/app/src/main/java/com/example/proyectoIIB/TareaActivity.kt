@@ -80,7 +80,7 @@ class TareaActivity : AppCompatActivity() {
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
-        menuInflater.inflate(R.menu.ciudad_context_menu, menu)
+        menuInflater.inflate(R.menu.tarea_context_menu, menu)
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {

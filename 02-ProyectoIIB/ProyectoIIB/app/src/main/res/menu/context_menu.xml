@@ -7,7 +7,7 @@
         android:id="@+id/delete"
         android:title="Eliminar" />
     <item
-        android:id="@+id/view_ciudades"
+        android:id="@+id/view_tareas"
         android:title="Ver Tareas" />
 
 </menu>

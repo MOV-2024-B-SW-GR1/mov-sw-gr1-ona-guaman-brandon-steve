@@ -51,7 +51,7 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         // Aquí puedes manejar las actualizaciones de la base de datos
     }
 
-    // CRUD Operaciones para Pais
+    // CRUD Operaciones para Categoria
     fun addCategoria(nombreCategoria: String, descripcion: String, fechaCreacion: String): Long {
         val db = this.writableDatabase
         val formattedDate = try {
@@ -65,7 +65,7 @@ class GestorSQL(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
             put("descripcion", descripcion)
             put("fechaCreacion", formattedDate)
         }
-        //return db.insert("Pais", null, values)
+
         val id = db.insert("Categoria", null, values)
 
         if (id == -1L) {

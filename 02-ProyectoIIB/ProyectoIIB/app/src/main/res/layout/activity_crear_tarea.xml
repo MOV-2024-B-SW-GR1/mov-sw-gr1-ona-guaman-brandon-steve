@@ -53,7 +53,7 @@
         android:layout_height="48dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="F Creacion (yyyy-MM-dd)"
+        android:hint="Fecha fin (yyyy-MM-dd)"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/prioridad"
         app:layout_constraintEnd_toEndOf="@+id/prioridad"

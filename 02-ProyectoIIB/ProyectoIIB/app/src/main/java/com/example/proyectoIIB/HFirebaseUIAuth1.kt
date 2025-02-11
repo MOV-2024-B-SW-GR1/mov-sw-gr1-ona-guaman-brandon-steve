@@ -76,9 +76,6 @@ class HFirebaseUIAuth1 : AppCompatActivity() {
             cambiarInterfaz()
             FirebaseAuth.getInstance().signOut()
 
-            // Al cerrar sesión, ocultamos el botón "Comenzar" nuevamente
-            //val buttonStart = findViewById<Button>(R.id.buttonStart)
-            //buttonStart.visibility = View.GONE
         }
 
         // Configurar el botón "Comenzar"

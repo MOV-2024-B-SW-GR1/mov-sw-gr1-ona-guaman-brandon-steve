@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 gestorSQL.deleteCategoria(gestorSQL.getCategoria()[info.position].id)
                 updateListView()
             }
-            R.id.view_ciudades -> viewTareas(info.position)
+            R.id.view_tareas -> viewTareas(info.position)
             else -> return super.onContextItemSelected(item)
         }
         return true
